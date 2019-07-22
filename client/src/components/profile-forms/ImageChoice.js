@@ -16,7 +16,7 @@ const ImageChoice = ({ images, getRandomUnsplashImages, onChangeImg, externalImg
 
     return (
         <Fragment>
-            <div className="word-container" >
+            <div className="word-container cheese" >
                 <div className="indiv-word">Choose an image type</div>
                 {selectionChoices.map((word, index) => {
                     return (
