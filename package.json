@@ -25,7 +25,8 @@
     "mongoose": "^5.6.4",
     "node-fetch": "^2.6.0",
     "request": "^2.88.0",
-    "unsplash-js": "^5.0.0"
+    "unsplash-js": "^5.0.0",
+    "mem": ">=4.0.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.1"
