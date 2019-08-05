@@ -5,10 +5,7 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    company: {
-        type: String
-    },
-    website: {
+    blog: {
         type: String
     },
     location: {
@@ -30,17 +27,17 @@ const ProfileSchema = new mongoose.Schema({
     githubusername: {
         type: String
     },
-    experience: [
+    hikes: [
         {
-            title: {
-                type: String,
-                required: true
-            },
-            company: {
+            name: {
                 type: String,
                 required: true
             },
             location: {
+                type: String,
+                required: true
+            },
+            length: {
                 type: String,
             },
             from: {
@@ -50,39 +47,60 @@ const ProfileSchema = new mongoose.Schema({
             to: {
                 type: Date,
             },
-            current: {
-                type: Boolean,
-                default: false
+            description: {
+                type: String,
+            },
+            status: {
+                type: String,
+                required: true
+            },
+            apiData: {
+                type: String,
+            },
+        }
+    ],
+    hikesWishList: [
+        {
+            name: {
+                type: String,
+                required: true
+            },
+            location: {
+                type: String,
+                required: true
+            },
+            length: {
+                type: String,
+            },
+            from: {
+                type: Date,
+                required: true
+            },
+            to: {
+                type: Date,
             },
             description: {
                 type: String,
             }
         }
     ],
-    education: [
+    courses: [
         {
-            school: {
+            authority: {
                 type: String,
                 required: true
             },
-            degree: {
+            name: {
                 type: String,
                 required: true
             },
-            fieldofstudy: {
+            category: {
                 type: String,
                 required: true
             },
-            from: {
+            completedDate: {
                 type: Date,
                 required: true
-            },
-            to: {
-                type: Date,
-            },
-            current: {
-                type: Boolean,
-                default: false
             },
             description: {
                 type: String,
