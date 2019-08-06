@@ -12,15 +12,15 @@ const AddHike = ({ addHike, history }) => {
         location: '',
         name: "",
         length: "",
-        from: "",
-        to: "",
+        fromDate: "",
+        toDate: "",
         description: "",
         status: ""
     })
 
     // const [toDateDisabled, toggleDisabled] = useState(false);
 
-    const { location, name, length, from, to, description, status } = formData;
+    const { location, name, length, fromDate, toDate, description, status } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -51,11 +51,11 @@ const AddHike = ({ addHike, history }) => {
                 </div>
                 <div className="form-group">
                     <h4>From Date</h4>
-                    <input type="date" value={from} onChange={e => onChange(e)} name="from" />
+                    <input type="date" value={fromDate} onChange={e => onChange(e)} name="fromDate" />
                 </div>
                 <div className="form-group">
                     <h4>To Date (only if overnight)</h4>
-                    <input type="date" value={to} onChange={e => onChange(e)} name="to"
+                    <input type="date" value={toDate} onChange={e => onChange(e)} name="toDate"
                         disabled={
                             // toDateDisabled 
                             false ? 'disabled' : ''} />

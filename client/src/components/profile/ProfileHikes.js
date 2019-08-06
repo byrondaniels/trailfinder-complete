@@ -4,13 +4,13 @@ import Moment from 'react-moment';
 import moment from 'moment';
 
 const ProfileHikes = ({
-    hikes: { title, location, to, from, description }
+    hikes: { title, location, toDate, fromDate, description }
 }) => (
         <div>
             <h3 className="text-dark">{"??????"}</h3>
             <p>
-                <Moment format="YYYY/MM/DD">{moment.utc(from)}</Moment> -{' '}
-                {!to ? ' Day Trip' : <Moment format="YYYY/MM/DD">{moment.utc(to)}</Moment>}
+                <Moment format="YYYY/MM/DD">{moment.utc(fromDate)}</Moment> -{' '}
+                {!toDate ? ' Day Trip' : <Moment format="YYYY/MM/DD">{moment.utc(toDate)}</Moment>}
             </p>
             <p><strong>Position: </strong> {title}</p>
             <p><strong>Location: </strong> {location}</p>

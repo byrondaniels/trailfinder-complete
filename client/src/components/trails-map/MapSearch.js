@@ -19,15 +19,17 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) =
 
     const filterTrails = useCallback((trails, filterValues) => {
         return trails.filter(trail =>
-            (filterValues[0].checked && (filterValues[0].max >= trail.length) && (trail.length > filterValues[0].min))
-            || (filterValues[1].checked && (filterValues[1].max >= trail.length) && (trail.length > filterValues[1].min))
-            || (filterValues[2].checked && (filterValues[2].max >= trail.length) && (trail.length > filterValues[2].min))
-            || (filterValues[3].checked && (filterValues[3].max >= trail.length) && (trail.length > filterValues[3].min)))
+            filterValues.some(f => f.checked &&
+                (f.max >= trail.length) &&
+                (trail.length > f.min)
+            ))
     }, [])
+    const [filterToggle, setfilterToggle] = useState(false);
+    const onFilterClick = () => { setfilterToggle(!filterToggle) }
 
     const [filterValues, setFilter] = useState(initialFilterValues);
-    const filteredTrails = useMemo(() => (filterTrails(hikingProject, filterValues)), [hikingProject, filterValues, filterTrails])
 
+    const filteredTrails = useMemo(() => (filterTrails(hikingProject, filterValues)), [hikingProject, filterValues, filterTrails])
     const handleChangeCheckbox = id => {
         setFilter(
             filterValues.map(item => {
@@ -43,9 +45,11 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) =
     }
 
     return (
-        <div>
+        <div className="mapContainer2">
+            <div className="filterBtn" onClick={onFilterClick}>Filter</div>
+            <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} filterToggle={filterToggle} />
             <div className="resultsContainer">
-                <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
+
                 <MapRender trails={filteredTrails} mapClicked={mapClicked} mapCoordonates={mapCoordonates} />
                 <ResultsList trails={filteredTrails} isAuthenticated={isAuthenticated} />
             </div>

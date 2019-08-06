@@ -15,7 +15,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
   background-color: #fff;
   color: #333;
@@ -49,6 +49,16 @@ img {
   overflow: hidden;
 }
 
+.mapContainer2{
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  overflow-x: hidden;
+}
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -318,8 +328,9 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 15px 100px;
   position: fixed;
+  height: 70px;
   z-index: 1;
   width: 100%;
   top: 0;
@@ -527,16 +538,42 @@ button {
 
 /* Map Search Styling */
 
+.filterBtn{
+  position: absolute;
+  z-index: 1;
+  background: white;
+  color: rgb(86, 86, 86);
+  font-family: Roboto, Arial, sans-serif;
+  padding: 0px 17px;
+  font-size: 18px;
+  background-color: rgb(255, 255, 255);
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  background-clip: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  min-width: 66px;
+  top: 10px;
+  left: 180px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .filterMenu{
   display: flex;
   flex-direction: column;
-  width: 450px;
-  height: 80vh;
+  width: 146px;
+  position: absolute;
+  top: 55px;
+  left: 180px;
   justify-content: left;
   background: var(--primary-color);
   border: solid 3px var(--dark-color);
-  border-bottom: none; 
   padding-left: 3px; 
+  z-index: 2;
+  overflow: hidden;
+  transition: height 1s, border-width 1s;
 }
 
 .filterMenu > span{
@@ -573,12 +610,13 @@ button {
 
 .resultsContainer{
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
+  flex-basis: 100vh;
 }
 .resultsOverview{
   display: flex;
   justify-content: space-around;
-  width: 1036px;
+  width: 100%;
   height: 50px;
   background: var(--primary-color);
   border: solid 3px var(--dark-color);
@@ -592,21 +630,19 @@ button {
   display: flex;
   padding-top: 29px;
   flex-wrap: wrap;
-  width: 900px;
-  height: 80vh;
   align-content: flex-start;
   overflow-y: scroll;
   overflow-x: hidden;
   background: var(--dark-color);
   margin: 0;
   position: relative;
+  height: 100%;
+  transition: width 1s;
 }
-.trail-list-flex >span{
-  color: var(--light-color);
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 5px;
-  align-items: center;
+
+.trail-list-flex >div:first-child{
+width: 400px;
+position: absolute;
 }
 .list-padding{
   height: 10vh;
@@ -626,16 +662,24 @@ button {
   border-radius: 2px;
 }
 .hike-card {
-  height: 150px;
-  width: 330px;
+  /* height: 150px; */
+  width: 100%;
+  font-size: 1.1rem;
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 2px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border: black solid 2px;
   padding-bottom: 10px;
+  padding-right: 2px;
   background: var(--light-color);
+  transition: height 1s;
+  overflow: hidden;
+}
+.hike-card >div:first-child{
+  display: flex;
+  flex-direction: row;
 }
 .hike-card:hover {
   border: white solid 2px;
@@ -645,10 +689,10 @@ button {
   background-size: cover;
   background-position: bottom;
   height: 145px;
-  width: 150px;
+  width: 200px;
 }
 .hike-content{
-  width: 180px;
+  width: 300px;
   padding-left: 5px;
   position: relative;
   display: flex;

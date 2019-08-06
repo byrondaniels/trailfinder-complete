@@ -50,7 +50,6 @@ export const getGithubRepos = (username) => async dispatch => {
 
     try {
         const res = await axios.get(`/api/profile/github/${username}`)
-
         dispatch({ type: GET_REPOS, payload: res.data })
     } catch (error) {
         dispatch({
@@ -62,8 +61,9 @@ export const getGithubRepos = (username) => async dispatch => {
 
 export const getHikingProjectTrails = (lat, long, distance = 200) => async dispatch => {
     try {
-        const res = await axios.get(`https://www.hikingproject.com/data/get-trails?maxResults=200&lat=${lat}&lon=${long}&maxDistance=${distance}&key=${hikingProjectKey}`)
-        dispatch({ type: GET_HIKING_PROJECT_TRAILS, payload: res.data.trails })
+        const link = `https://www.hikingproject.com/data/get-trails?maxResults=200&lat=${lat}&lon=${long}&maxDistance=${distance}&key=${hikingProjectKey}`
+        const res = await fetch(link).then(response => response.json())
+        dispatch({ type: GET_HIKING_PROJECT_TRAILS, payload: res.trails })
     } catch (error) {
         dispatch({
             type: PROFILE_ERROR, payload: { msg: "External Server Error", status: 500 }

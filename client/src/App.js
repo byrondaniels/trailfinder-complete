@@ -49,7 +49,6 @@ const App = () => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/profiles" component={Profiles} />
                 <Route exact path="/profile/:id" component={Profile} />
-                <Route exact path="/trails-map" component={MapSearch} />
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/create-profile" component={CreateProfile} />
                 <PrivateRoute exact path="/edit-profile" component={EditProfile} />
@@ -58,7 +57,9 @@ const App = () => {
                 <PrivateRoute exact path="/posts" component={Posts} />
                 <PrivateRoute exact path="/make-post" component={PostForm} />
                 <PrivateRoute exact path="/posts/:id" component={Post} />
+                <Route exact path="/trails-map" component={MapSearch} />
                 <Route component={UnknownRoute} />
+
               </Switch>
             </div>
           </Switch>

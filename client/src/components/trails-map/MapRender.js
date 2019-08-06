@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { compose, withProps } from "recompose";
 import { setMapIconColor } from "../../utils/setMapIconColor";
 import { googleMapKey } from "../../config"
@@ -17,13 +17,13 @@ const MapRender = compose(
         googleMapURL:
             `https://maps.googleapis.com/maps/api/js?key=${googleMapKey}&v=3.38&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `80vh`, width: '70vw', margin: '0' }} />,
+        containerElement: <div style={{ width: '100%', margin: '0' }} />,
         mapElement: <div style={{ height: `100%` }} />
     }),
     withScriptjs,
     withGoogleMap
 )(props => (
-    <div className="">
+    <Fragment>
         <GoogleMap onClick={(t) => props.mapClicked(t)}
             defaultZoom={6} defaultCenter={{
                 lat: props.mapCoordonates.latitude,
@@ -65,7 +65,7 @@ const MapRender = compose(
                 })}
             <Marker position={{ lat: 51.044270, lng: -114.062019 }} />
         </GoogleMap>
-    </div>
+    </Fragment>
 ));
 
 export default MapRender; 
