@@ -744,11 +744,6 @@ position: absolute;
 
 /* Mobile Styles */
 @media (max-width: 800px) {
-=======
-
-/* Mobile Styles */
-@media (max-width: 700px) {
->>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   .container {
     margin-top: 8rem;
   }
