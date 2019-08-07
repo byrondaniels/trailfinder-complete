@@ -14,13 +14,9 @@ const CommentItem = ({
         <div className='post bg-white p-1 my-1'>
             <div>
                 <Link to={`/profile/${user}`}>
-<<<<<<< HEAD
                     <div className='round-img post-img' style={{
                         backgroundImage: `url(${avatar && avatar})`
                     }} />
-=======
-                    <img className='round-img' src={avatar} alt='' />
->>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
                     <h4>{name}</h4>
                 </Link>
             </div>
