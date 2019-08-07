@@ -1,8 +1,8 @@
 {
-    "mongoURI": "process.env.MONGO_URI ",
-    "jwtSecret": "process.env.JWT_SECRET",
-    "unsplashAccessKey": "process.env.UNSPLASH_ACCESS",
-    "unsplashSecret": "process.env.UNSPLASH_SECRET",
-    "googleMapKey": "process.env.GOOGLE_MAP_KEY",
-    "hikingProjectKey": "process.env.HIKING_PROJECT_KEY"
+    "mongoURI": "mongodb+srv://byrondaniels:cheese1@devconnector-3j6cb.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "399d7e819ee7cd769196",
+    "githubSecret": "1411ca83ef030633da6d1c70beacabd7cb29e212",
+    "unsplashAccessKey": "ef5b53eccf718dd49a5d48f7877ac98f2d767f893b7aec7b8c9276721d0f6082",
+    "unsplashSecret": "b3601d6c0c6ab62ae97887af1a7d2ff4fecd0efbbd38d48fe548365a04c7fd55"
 }
