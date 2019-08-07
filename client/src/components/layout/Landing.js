@@ -10,20 +10,21 @@ const Landing = ({ isAuthenticated }) => {
     }
 
     return (
-        <section className="landing">
+        <div className="landing">
             <div className="dark-overlay">
                 <div className="landing-inner">
-                    <h1 className="x-large">Hiker Connector</h1>
+                    <h1 className="x-large">TrailFinder</h1>
                     <p className="lead">
-                        Create a profile, share experiences and check out where the best trails are
+                        Create a profile, share hikes and check out where the best trails are
                     </p>
                     <div className="buttons">
                         <Link to="/register" className="btn btn-primary">Sign Up</Link>
                         <Link to="/login" className="btn btn-light">Login</Link>
+                        <Link to="/trails-map" className="btn btn-dark">Explore Trails</Link>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     )
 };
 

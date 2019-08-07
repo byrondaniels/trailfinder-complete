@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const ProfileTop = ({ profile: { externalImg, status, company, location, website, social, user: { name, avatar } } }) => {
+const ProfileTop = ({ profile: { externalImg, status, location, blog, social, user: { name, avatar } } }) => {
     return (
         <div className="profile-top bg-primary p-2">
-            <img
-                className="round-img my-1"
-                src={externalImg ? externalImg : avatar}
-                alt=""
-            />
-            <h1 className="large">{name}</h1>
-            <p className="lead">{status} {company && <span> at {company}</span>}</p>
+            <div className='round-img profile-img' style={{
+                backgroundImage: `url(${avatar ? avatar : externalImg})`
+            }} />
+            <h1 className="large">{name} from {location}</h1>
+            <p className="lead">{status}</p>
             <p>{location && <span>{location}</span>}</p>
             <div className="icons my-1">
                 {
-                    website && (
-                        <a href={website} target='_blank' rel='noopener noreferrer'>
+                    blog && (
+                        <a href={blog} target='_blank' rel='noopener noreferrer'>
                             <i className='fas fa-globe fa-2x' />
                         </a>
                     )

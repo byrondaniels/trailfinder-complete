@@ -19,23 +19,19 @@ const ImageChoice = ({ images, getRandomUnsplashImages, onChangeImg, externalImg
             <div className="word-container" >
                 <div className="indiv-word">Choose an image type</div>
                 {selectionChoices.map((word, index) => {
-                    return (
-                        <div className="indiv-word sel-option" onClick={() => { getRandomUnsplashImages(word) }} key={index} >{word}</div>
-                    )
+                    return (<div className="indiv-word sel-option" onClick={() => { getRandomUnsplashImages(word) }} key={index} >{word}</div>)
                 })} </div>
             <div className="images-container">
                 {images ? images.map((image, index) => {
                     return (
-                        <div className="img-wrap" key={index} name="externalImg" onClick={() => { onChangeImg(image.small) }}>
-                            <span className={classNames({
-                                'sel-border': image.small === externalImg
+                        <div key={index} name="externalImg" onClick={() => { onChangeImg(image.small) }}>
+                            <div className={classNames({
+                                "img-wrap": image.small !== externalImg
                             })}>
-                                < img
-                                    className="indiv-img"
-                                    src={image.small}
-                                    alt="Error"
-                                />
-                            </span>
+                                <div className='indiv-img' style={{
+                                    backgroundImage: `url(${image.small})`
+                                }} />
+                            </div>
                         </div>)
                 }) : <Spinner />}
             </div>

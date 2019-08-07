@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions'
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
-import Experience from './Experience'
-import Education from './Education'
+import HikeExperience from './HikeExperience'
+import Courses from './Courses'
 
 
 const Dashboard = ({
@@ -25,26 +25,24 @@ const Dashboard = ({
             <Fragment>
                 <h1 className='large text-primary'>Dashboard</h1>
                 <p className='lead'>
-                    <i className='fas fa-user' /> Welcome {user && user.name}
+                    <i className='fas fa-hiking' /> Welcome {user && user.name}
                 </p>
                 {profile !== null ? (
                     <Fragment>
                         <DashboardActions />
-                        <Experience experience = {profile.experience}/>
-                        <Education education = {profile.education}/>
-
-
+                        <HikeExperience identifier="Planned" hikes={profile.hikes.filter(hikes => hikes.status === "Planned")} />
+                        <HikeExperience identifier="Completed" hikes={profile.hikes.filter(hikes => hikes.status === "Completed")} />
+                        <Courses courses={profile.courses} />
                     </Fragment>
                 ) : (
                         <Fragment>
                             <p>You have not yet setup a profile, please add some info</p>
                             <Link to='/create-profile' className='btn btn-primary my-1'>
-                                Create Profile
-          </Link>
-                                  <div className='my-2'>
-                            <button className='btn btn-danger' onClick ={()=>deleteAccount()} >
-                                <i className='fas fa-user-minus' /> Delete My Account</button>
-                        </div>
+                                Create Profile </Link>
+                            <div className='my-2'>
+                                <button className='btn btn-danger' onClick={() => deleteAccount()} >
+                                    <i className='fas fa-user-minus' /> Delete My Account</button>
+                            </div>
                         </Fragment>
                     )}
             </Fragment>

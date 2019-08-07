@@ -50,8 +50,7 @@ router.post(
         }
 
         const {
-            company,
-            website,
+            blog,
             location,
             bio,
             externalImg,
@@ -68,8 +67,7 @@ router.post(
         // Build profile object
         const profileFields = {};
         profileFields.user = req.user.id;
-        if (company) profileFields.company = company;
-        if (website) profileFields.website = website;
+        if (blog) profileFields.blog = blog;
         if (location) profileFields.location = location;
         if (bio) profileFields.bio = bio;
         if (externalImg) profileFields.externalImg = externalImg;
@@ -81,11 +79,11 @@ router.post(
 
         // Build social object
         profileFields.social = {};
-        if (youtube) profileFields.social.youtube = youtube;
-        if (twitter) profileFields.social.twitter = twitter;
-        if (facebook) profileFields.social.facebook = facebook;
-        if (linkedin) profileFields.social.linkedin = linkedin;
-        if (instagram) profileFields.social.instagram = instagram;
+        if (youtube) profileFields.social.youtube = "https://www.youtube.com/" + youtube;
+        if (twitter) profileFields.social.twitter = "https://www.twitter.com/" + twitter;
+        if (facebook) profileFields.social.facebook = "https://www.facebook.com/" + facebook;
+        if (linkedin) profileFields.social.linkedin = "https://www.linkedin.com/" + linkedin;
+        if (instagram) profileFields.social.instagram = "https://www.instagram.com/" + instagram;
 
         if (externalImg) {
             try {
@@ -183,24 +181,16 @@ router.delete('/', auth, async (req, res) => {
     }
 });
 
-// @route    PUT api/profile/experience
-// @desc     Add profile experience
+// @route    PUT api/profile/hikes
+// @desc     Add profile hikes
 // @access   Private
-router.put(
-    '/experience',
-    [
-        auth,
-        [
-            check('title', 'Title is required')
-                .not()
-                .isEmpty(),
-            check('company', 'Company is required')
-                .not()
-                .isEmpty(),
-            check('from', 'From date is required')
-                .not()
-                .isEmpty()
-        ]
+router.put('/hikes',
+    [auth, [
+        check('name', 'Title is required').not().isEmpty(),
+        check('location', 'Location is required').not().isEmpty(),
+        check('fromDate', 'From date is required').not().isEmpty(),
+        check('status', 'Status is required').not().isEmpty()
+    ]
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -209,32 +199,29 @@ router.put(
         }
 
         const {
-            title,
-            company,
+            name,
+            length,
             location,
-            from,
-            to,
-            current,
-            description
+            fromDate,
+            toDate,
+            description,
+            status
         } = req.body;
 
         const newExp = {
-            title,
-            company,
+            name,
+            length,
             location,
-            from,
-            to,
-            current,
-            description
+            fromDate,
+            toDate,
+            description,
+            status
         };
 
         try {
             const profile = await Profile.findOne({ user: req.user.id });
-
-            profile.experience.unshift(newExp);
-
+            profile.hikes.unshift(newExp);
             await profile.save();
-
             res.json(profile);
         } catch (err) {
             console.error(err.message);
@@ -243,39 +230,55 @@ router.put(
     }
 );
 
-// @route    DELETE api/profile/experience/:exp_id
-// @desc     Delete experience from profile
+
+// @route    PUT api/profile/hikes
+// @desc     Add profile hikes
 // @access   Private
-// router.delete('/experience/:exp_id', auth, async (req, res) => {
-//   try {
-//     const profile = await Profile.findOne({ user: req.user.id });
+router.put('/APIhikes',
+    [auth, [
+        check('hikeData', 'Missing hike data').not().isEmpty(),
+    ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-//     // Get remove index
-//     const removeIndex = profile.experience
-//       .map(item => item.id)
-//       .indexOf(req.params.exp_id);
+        const {
+            hikeData,
+        } = req.body;
 
-//     profile.experience.splice(removeIndex, 1);
+        const newHike = {
+            hikeData,
+        };
 
-//     await profile.save();
+        try {
+            const profile = await Profile.findOne({ user: req.user.id });
+            console.log("profile", profile)
+            profile.hikingprojecttrails.unshift(newHike);
+            await profile.save();
+            res.json(profile);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
 
-//     res.json(profile);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
-
-router.delete('/experience/:exp_id', auth, async (req, res) => {
+// @route    DELETE api/profile/hikes/:hike_id
+// @desc     Delete hikes from profile
+// @access   Private
+router.delete('/hikes/:hike_id', auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
-        const expIds = foundProfile.experience.map(exp => exp._id.toString());
-        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /experience/5
-        const removeIndex = expIds.indexOf(req.params.exp_id);
+        const expIds = foundProfile.hikes.map(exp => exp._id.toString());
+        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /hikes/5
+        const removeIndex = expIds.indexOf(req.params.hike_id);
         if (removeIndex === -1) {
             return res.status(500).json({ msg: "Server error" });
         } else {
-            foundProfile.experience.splice(removeIndex, 1);
+            foundProfile.hikes.splice(removeIndex, 1);
             await foundProfile.save();
             return res.status(200).json(foundProfile);
         }
@@ -285,26 +288,18 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
     }
 });
 
-// @route    PUT api/profile/education
-// @desc     Add profile education
+// @route    PUT api/profile/courses
+// @desc     Add profile course
 // @access   Private
 router.put(
-    '/education',
+    '/courses',
     [
         auth,
         [
-            check('school', 'School is required')
-                .not()
-                .isEmpty(),
-            check('degree', 'Degree is required')
-                .not()
-                .isEmpty(),
-            check('fieldofstudy', 'Field of study is required')
-                .not()
-                .isEmpty(),
-            check('from', 'From date is required')
-                .not()
-                .isEmpty()
+            check('authority', 'Authority is required').not().isEmpty(),
+            check('name', 'Course name is required').not().isEmpty(),
+            check('category', 'Category is required').not().isEmpty(),
+            check('completedDate', 'Completed Date is required').not().isEmpty()
         ]
     ],
     async (req, res) => {
@@ -314,32 +309,25 @@ router.put(
         }
 
         const {
-            school,
-            degree,
-            fieldofstudy,
-            from,
-            to,
-            current,
+            authority,
+            name,
+            category,
+            completedDate,
             description
         } = req.body;
 
-        const newEdu = {
-            school,
-            degree,
-            fieldofstudy,
-            from,
-            to,
-            current,
+        const newCourse = {
+            authority,
+            name,
+            category,
+            completedDate,
             description
         };
 
         try {
             const profile = await Profile.findOne({ user: req.user.id });
-
-            profile.education.unshift(newEdu);
-
+            profile.courses.unshift(newCourse);
             await profile.save();
-
             res.json(profile);
         } catch (err) {
             console.error(err.message);
@@ -348,39 +336,18 @@ router.put(
     }
 );
 
-// @route    DELETE api/profile/education/:edu_id
-// @desc     Delete education from profile
-// @access   Private
-//router.delete('/education/:edu_id', auth, async (req, res) => {
-//try {
-//const profile = await Profile.findOne({ user: req.user.id });
 
-// Get remove index
-//const removeIndex = profile.education
-//.map(item => item.id)
-//.indexOf(req.params.edu_id);
-/*
-    profile.education.splice(removeIndex, 1);
-    await profile.save();
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-*/
-
-router.delete("/education/:edu_id", auth, async (req, res) => {
+router.delete("/courses/:course_id", auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
-        const eduIds = foundProfile.education.map(edu => edu._id.toString());
-        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /education/5
-        const removeIndex = eduIds.indexOf(req.params.edu_id);
+        const courseIds = foundProfile.courses.map(item => item._id.toString());
+        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /course/5
+        const removeIndex = courseIds.indexOf(req.params.course_id);
         if (removeIndex === -1) {
             return res.status(500).json({ msg: "Server error" });
         } else {
 
-            foundProfile.education.splice(
+            foundProfile.courses.splice(
                 removeIndex,
                 1,
             );
@@ -392,6 +359,7 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
         return res.status(500).json({ msg: "Server error" });
     }
 });
+
 // @route    GET api/profile/github/:username
 // @desc     Get user repos from Github
 // @access   Public
@@ -422,7 +390,20 @@ router.get('/github/:username', (req, res) => {
     }
 });
 
-router.get('/unsplash/:subject', (req, res) => {
+// @route    GET api/profile/hiking-project/:lat/:long/:distance
+// @desc     Get trails from hiking project api using coordonates
+// @access   Private
+// router.get('/hiking-project/:lat/:long/:distance',auth, (req, res) => {
+
+
+
+
+// })
+
+// @route    GET api/profile/unsplash/:subject
+// @desc     Get random images from Unsplash
+// @access   Private
+router.get('/unsplash/:subject', auth, (req, res) => {
     try {
         const unsplash = new Unsplash({
             applicationId: `${config.get('unsplashAccessKey')}`,

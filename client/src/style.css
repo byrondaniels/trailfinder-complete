@@ -1,7 +1,5 @@
 .images-container{
-    /* background: rgb(151, 150, 148); */
     display: flex;
-
 }
 
 .indiv-img{
@@ -10,9 +8,9 @@
     height: 180px!important;
     margin: 5px;
     margin-bottom: 0px;
-}
-.sel-border{
-    border-bottom: solid green 4px;
+    background-position: center center;
+    object-fit: cover;
+    background-size: cover;
 }
 
 .img-wrap{

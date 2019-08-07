@@ -11,8 +11,7 @@ const EditProfile = ({
     history,
 }) => {
     const [formData, setFormData] = useState({
-        company: "",
-        website: "",
+        blog: "",
         location: "",
         status: "",
         skills: "",
@@ -28,8 +27,7 @@ const EditProfile = ({
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
     const [displayImageEntry, toggleImageEntry] = useState(false);
     const {
-        company,
-        website,
+        blog,
         location,
         status,
         skills,
@@ -54,8 +52,7 @@ const EditProfile = ({
         getCurrentProfile();
 
         setFormData({
-            company: loading || !profile.company ? "" : profile.company,
-            website: loading || !profile.website ? "" : profile.website,
+            blog: loading || !profile.blog ? "" : profile.blog,
             location: loading || !profile.location ? "" : profile.location,
             status: loading || !profile.status ? "" : profile.status,
             skills: loading || !profile.skills ? "" : profile.skills.join(','),
@@ -77,7 +74,7 @@ const EditProfile = ({
             <h1 className='large text-primary'>Edit Your Profile</h1>
             <p className='lead'>
                 <i className='fas fa-user' /> Edit your profile below
-      </p>
+            </p>
             <small>* = required field</small>
             <form className='form' onSubmit={e => onSubmit(e)}>
                 <div className='form-group'>
@@ -91,32 +88,20 @@ const EditProfile = ({
                         <option value='Other'>Other</option>
                     </select>
                     <small className='form-text'>
-                        Give us an idea of where you are at in your career
-          </small>
+                        Give us an idea of your experience level
+                    </small>
                 </div>
                 <div className='form-group'>
                     <input
                         type='text'
-                        placeholder='Company'
-                        name='company'
-                        value={company}
+                        placeholder='blog'
+                        name='blog'
+                        value={blog}
                         onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
-                        Could be your own company or one you work for
-          </small>
-                </div>
-                <div className='form-group'>
-                    <input
-                        type='text'
-                        placeholder='Website'
-                        name='website'
-                        value={website}
-                        onChange={e => onChange(e)}
-                    />
-                    <small className='form-text'>
-                        Could be your own or a company website
-          </small>
+                        Could be your own or a favorite blog
+                    </small>
                 </div>
                 <div className='form-group'>
                     <input
@@ -127,8 +112,8 @@ const EditProfile = ({
                         onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
-                        City & state suggested (eg. Boston, MA)
-          </small>
+                        City, Country (Where you currently live)
+                    </small>
                 </div>
                 <div className='form-group'>
                     <input
@@ -139,8 +124,8 @@ const EditProfile = ({
                         onChange={e => onChange(e)}
                     />
                     <small className='form-text'>
-                        Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </small>
+                        Please use comma separated values (eg. Scrambling, Backcountry, Mountaineering, TrailRunning)
+                    </small>
                 </div>
                 <div className='form-group'>
                     <input
@@ -153,7 +138,7 @@ const EditProfile = ({
                     <small className='form-text'>
                         If you want your latest repos and a Github link, include your
                         username
-          </small>
+                    </small>
                 </div>
                 <div className='form-group'>
                     <textarea
@@ -228,7 +213,7 @@ const EditProfile = ({
                         </div>
                     </Fragment>
                 )}
-                <small className='form-text'>{externalImg && "An image is found for your profile"}</small>
+                <small className='form-text'>{externalImg && "An image is set for your profile"}</small>
                 <div className='my-2'>
                     <button
                         onClick={() => toggleImageEntry(!displayImageEntry)}
@@ -249,12 +234,10 @@ const EditProfile = ({
                 <input type='submit' className='btn btn-primary my-1' />
                 <Link className='btn btn-light my-1' to='/dashboard'>
                     Go Back
-        </Link>
+                </Link>
             </form>
         </Fragment>
-    ) : (
-            <Redirect to='/dashboard' />
-        );
+    ) : (<Redirect to='/dashboard' />);
 };
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,

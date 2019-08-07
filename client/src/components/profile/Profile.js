@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
-import ProfileExperience from './ProfileExperience';
-import ProfileEducation from './ProfileEducation';
+import ProfileHikes from './ProfileHikes';
+import ProfileCourses from './ProfileCourses';
 import ProfileGithub from './ProfileGithub';
 import { getProfileById } from '../../actions/profile';
 
@@ -40,31 +40,31 @@ const Profile = ({
                             <ProfileTop profile={profile} />
                             <ProfileAbout profile={profile} />
                             <div className='profile-exp bg-white p-2'>
-                                <h2 className='text-primary'>Experience</h2>
-                                {profile.experience.length > 0 ? (
+                                <h2 className='text-primary'>Hikes</h2>
+                                {profile.hikes.length > 0 ? (
                                     <Fragment>
-                                        {profile.experience.map(experience => (
-                                            <ProfileExperience
-                                                key={experience._id}
-                                                experience={experience}
+                                        {profile.hikes.map(hikes => (
+                                            <ProfileHikes
+                                                key={hikes._id}
+                                                hikes={hikes}
                                             />
                                         ))}
                                     </Fragment>
-                                ) : (<h4>No experience credentials</h4>)}
+                                ) : (<h4>No hikes completed</h4>)}
                             </div>
 
                             <div className='profile-edu bg-white p-2'>
-                                <h2 className='text-primary'>Education</h2>
-                                {profile.education.length > 0 ? (
+                                <h2 className='text-primary'>Courses</h2>
+                                {profile.courses.length > 0 ? (
                                     <Fragment>
-                                        {profile.education.map(education => (
-                                            <ProfileEducation
-                                                key={education._id}
-                                                education={education}
+                                        {profile.courses.map(course => (
+                                            <ProfileCourses
+                                                key={course._id}
+                                                course={course}
                                             />
                                         ))}
                                     </Fragment>
-                                ) : (<h4>No education credentials</h4>)
+                                ) : (<h4>No courses found</h4>)
                                 }
                             </div>
 

@@ -10,6 +10,9 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <ul>
             <li>
+                <Link to="/trails-map" >Explore Trails</Link>
+            </li>
+            <li>
                 <Link to="/profiles" >Users</Link>
             </li>
             <li>
@@ -29,6 +32,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const guestLinks = (
         <ul>
+            <li><Link to="/trails-map" >Explore Trails</Link></li>
             <li><Link to="/profiles" >Users</Link></li>
             <li><Link to="/register" >Register</Link></li>
             <li><Link to="/login" >Login</Link></li>

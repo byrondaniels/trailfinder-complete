@@ -4,14 +4,16 @@ import PropTypes from 'prop-types'
 
 
 
-const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, company, location, skills, externalImg } }) => {
+const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, location, skills, externalImg } }) => {
     return (
         <div className='profile bg-light'>
-            <img src={externalImg ? externalImg : avatar} alt="" className="round-img" />
+            <div className='round-img profile-img-2' style={{
+                backgroundImage: `url(${externalImg ? externalImg : avatar})`
+            }} />
             <div>
                 <h2>{name}</h2>
-                <p>{status} {company && <span> at {company}</span>}</p>
-                <p className="my-1">{location && <span> at {location}</span>}</p>
+                <p>{status}</p>
+                <p className="my-1">{location && <span>{location}</span>}</p>
 
                 <Link to={`/profile/${_id}`} className='btn btn-primary'>View Profile</Link>
 

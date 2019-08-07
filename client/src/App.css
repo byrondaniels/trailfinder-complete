@@ -15,7 +15,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
   background-color: #fff;
   color: #333;
@@ -49,6 +49,16 @@ img {
   overflow: hidden;
 }
 
+.mapContainer2{
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  overflow-x: hidden;
+}
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -129,6 +139,10 @@ img {
 }
 .my-3 {
   margin: 3rem 0;
+}
+
+#saveBtn{
+  width: 100px;
 }
 
 .btn {
@@ -240,6 +254,8 @@ img {
 }
 
 /* Forms */
+
+
 .form .form-group {
   margin: 1.2rem 0;
 }
@@ -250,6 +266,14 @@ img {
   color: #888;
 }
 
+.social-input span {
+  display: block;
+  padding: 0.4rem;
+  padding-top: 5px;
+  font-size: 1.4rem;
+}
+
+.form input[type='number'],
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
@@ -308,8 +332,9 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 15px 100px;
   position: fixed;
+  height: 70px;
   z-index: 1;
   width: 100%;
   top: 0;
@@ -371,7 +396,7 @@ button {
   grid-template-areas:
     'top top'
     'about about'
-    'exp edu'
+    'exp cor'
     'github github';
   grid-gap: 1rem;
 }
@@ -414,29 +439,29 @@ button {
   grid-area: exp;
 }
 
-.profile-edu {
-  grid-area: edu;
+.profile-cor {
+  grid-area: cor;
 }
 
 .profile-exp h2,
-.profile-edu h2 {
+.profile-cor h2 {
   margin-bottom: 1rem;
 }
 
 .profile-exp > div,
-.profile-edu > div {
+.profile-cor > div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
 
 .profile-exp > div:last-child,
-.profile-edu > div:last-child {
+.profile-cor > div:last-child {
   border: 0;
 }
 
 .profile-exp p,
-.profile-edu p {
+.profile-cor p {
   margin: 0.5rem 0;
 }
 
@@ -492,9 +517,233 @@ button {
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
+.post-img{
+  height: 50px;
+  width: 50px;
+  background-position: center center;
+  object-fit: cover;
+  background-size: cover;
+}
+
+.profile-img{
+  height: 250px;
+  width: 250px;
+  background-position: center center;
+  object-fit: cover;
+  background-size: cover;
+}
+.profile-img-2{
+  height: 150px;
+  width: 150px;
+  background-position: center center;
+  object-fit: cover;
+  background-size: cover;
+}
+
+/* Map Search Styling */
+
+.mapBtn{
+  position: absolute;
+  z-index: 1;
+  background: white;
+  color: rgb(86, 86, 86);
+  font-family: Roboto, Arial, sans-serif;
+  padding: 0px 17px;
+  font-size: 18px;
+  background-color: rgb(255, 255, 255);
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  background-clip: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  min-width: 66px;
+  top: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.map1{
+  left: 180px;
+}
+
+.map2{
+  left: 250px;
+}
+
+.dropdown-content li:hover{
+  background: rgb(212, 210, 210);
+  cursor: pointer;
+} 
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: 180px;
+  justify-content: left;
+  background: white;
+  padding-left: 3px; 
+  z-index: 2;
+  overflow: hidden;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.mapBtn:hover{
+  background: rgb(212, 210, 210);
+}
+
+.dropdown-content > span{
+  font-weight: bold;
+}
+
+.filterMenu > ul{
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-content li{
+  padding: 3px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filterMenu input{
+  margin-right: 10px; 
+}
+
+.dropdown-content ul li span {
+  position: absolute;
+  padding-left: 20px;
+}
+
+.dropdown-content input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.2); /* IE */
+  -moz-transform: scale(1.2); /* FF */
+  -webkit-transform: scale(1.2); /* Safari and Chrome */
+  -o-transform: scale(1.2); /* Opera */
+  transform: scale(1.2);
+  background: wheat;
+}
+
+#circ{
+  width: 12px;
+  height: 12px;
+  border-radius: 100px;
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.resultsContainer{
+  display: flex;
+  justify-content: space-around;
+  flex-basis: 100vh;
+}
+.resultsOverview{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 50px;
+  background: var(--primary-color);
+  border: solid 3px var(--dark-color);
+  padding-bottom: 3px;
+}
+.resultsOverview >div {
+  display: flex;
+  flex-direction: column;
+}
+.trail-list-flex {
+  display: flex;
+  padding-top: 29px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: var(--dark-color);
+  margin: 0;
+  position: relative;
+  height: 100%;
+  transition: width 1s;
+}
+
+.trail-list-flex >div:first-child{
+width: 400px;
+position: absolute;
+}
+.list-padding{
+  height: 10vh;
+}
+#top-exit-bar{
+  position: absolute;
+  left: 16px;
+  top: 1px;
+  background: purple;
+  width: 330px;
+  height: 28px;
+  z-index: 50;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  padding-top: 4px;
+  border-radius: 2px;
+}
+.hike-card {
+  /* height: 150px; */
+  width: 100%;
+  font-size: 1.1rem;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 2px;
+  display: flex;
+  flex-direction: column;
+  border: black solid 2px;
+  padding-bottom: 10px;
+  padding-right: 2px;
+  background: var(--light-color);
+  transition: height 1s;
+  overflow: hidden;
+}
+.hike-card >div:first-child{
+  display: flex;
+  flex-direction: row;
+}
+.hike-card:hover {
+  border: white solid 2px;
+  cursor: pointer;
+}
+.hike-image{
+  background-size: cover;
+  background-position: bottom;
+  height: 145px;
+  width: 200px;
+}
+.hike-content{
+  width: 300px;
+  padding-left: 5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.trail-card-btn{
+  position: absolute;
+  bottom: 2px;
+  left: 5px;
+}
+
+
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .container {
     margin-top: 8rem;
   }
@@ -558,7 +807,7 @@ button {
       'top'
       'about'
       'exp'
-      'edu'
+      'cor'
       'github';
   }
 
