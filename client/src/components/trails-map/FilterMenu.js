@@ -2,23 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 
-const FilterMenu = ({ filterValues, handleChangeCheckbox, filterToggle }) => {
+const FilterMenu = ({ filterValues, handleChangeCheckbox }) => {
     return (
-        <div className="filterMenu" style={(filterToggle) ? { height: "166px", borderWidth: "3px" } : { height: "0px", borderWidth: "0px" }}>
-            <span>Filter by Length: </span>
-            <ul>
-                {filterValues.map(item => (
-                    <li key={item.id}>
-                        <input
-                            type="checkbox"
-                            onChange={() => handleChangeCheckbox(item.id)}
-                            checked={item.checked}
-                        />
-                        <span>{item.name}</span>
-                        <div id="circ" style={{ backgroundColor: `${item.color}` }} />
-                    </li>
-                ))}
-            </ul>
+        <div className="dropdown" >
+            <div className="mapBtn map1" >Filter</div>
+            <div className="dropdown-content">
+                <span>Filter by Length: </span>
+                <ul>
+                    {filterValues.map(item => (
+                        <li key={item.id} onClick={() => handleChangeCheckbox(item.id)}>
+                            <input
+                                type="checkbox"
+                                checked={item.checked}
+                                readOnly
+                            />
+                            <span>{item.name}</span>
+                            <div id="circ" style={{ backgroundColor: `${item.color}` }} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 };

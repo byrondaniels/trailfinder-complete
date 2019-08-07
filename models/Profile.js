@@ -27,6 +27,13 @@ const ProfileSchema = new mongoose.Schema({
     githubusername: {
         type: String
     },
+    hikingprojecttrails: [
+        {
+            hikeData: {
+                type: String,
+                required: true
+            }
+        }],
     hikes: [
         {
             name: {
@@ -40,11 +47,10 @@ const ProfileSchema = new mongoose.Schema({
             length: {
                 type: String,
             },
-            from: {
+            fromDate: {
                 type: Date,
-                required: true
             },
-            to: {
+            toDate: {
                 type: Date,
             },
             description: {
@@ -54,34 +60,6 @@ const ProfileSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            apiData: {
-                type: String,
-            },
-        }
-    ],
-    hikesWishList: [
-        {
-            name: {
-                type: String,
-                required: true
-            },
-            location: {
-                type: String,
-                required: true
-            },
-            length: {
-                type: String,
-            },
-            from: {
-                type: Date,
-                required: true
-            },
-            to: {
-                type: Date,
-            },
-            description: {
-                type: String,
-            }
         }
     ],
     courses: [

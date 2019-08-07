@@ -5,11 +5,11 @@ import MapRender from "./MapRender"
 import ResultsOverview from "./ResultsOverview"
 import ResultsList from "./ResultsList"
 import FilterMenu from "./FilterMenu"
-import { getHikingProjectTrails } from "../../actions/profile"
+import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
 
 
-const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) => {
+const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
 
     const [mapCoordonates, setMapCoordonates] = useState({
         latitude: 48,
@@ -24,8 +24,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) =
                 (trail.length > f.min)
             ))
     }, [])
-    const [filterToggle, setfilterToggle] = useState(false);
-    const onFilterClick = () => { setfilterToggle(!filterToggle) }
+
 
     const [filterValues, setFilter] = useState(initialFilterValues);
 
@@ -39,6 +38,12 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) =
         );
     };
 
+    const [viewSavedTrails, setViewSavedTrails] = useState(false);
+    const toggleSaved = async () => {
+        if (!viewSavedTrails) await getCurrentProfile()
+        await setViewSavedTrails(!viewSavedTrails)
+    }
+
     const mapClicked = (e) => {
         setMapCoordonates({ latitude: e.latLng.lat(), longitude: e.latLng.lng(), displayCircle: true })
         getHikingProjectTrails(e.latLng.lat(), e.latLng.lng())
@@ -46,11 +51,17 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated }) =
 
     return (
         <div className="mapContainer2">
-            <div className="filterBtn" onClick={onFilterClick}>Filter</div>
-            <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} filterToggle={filterToggle} />
+            <div className="mapBtn map2" onClick={toggleSaved} >Saved Trails</div>
+            <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
             <div className="resultsContainer">
+                <MapRender
+                    trails={filteredTrails}
+                    mapClicked={mapClicked}
+                    mapCoordonates={mapCoordonates}
+                    viewSavedTrails={viewSavedTrails}
+                    userProfile={userProfile}
 
-                <MapRender trails={filteredTrails} mapClicked={mapClicked} mapCoordonates={mapCoordonates} />
+                />
                 <ResultsList trails={filteredTrails} isAuthenticated={isAuthenticated} />
             </div>
             <ResultsOverview filteredTrails={filteredTrails} hikingProject={hikingProject} />
@@ -67,10 +78,11 @@ MapSearch.propTypes = {
 
 const mapStateToProps = state => ({
     hikingProject: state.profile.hikingProject,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    userProfile: state.profile.profile
 });
 
 export default connect(
     mapStateToProps,
-    { getHikingProjectTrails },
+    { getHikingProjectTrails, getCurrentProfile },
 )(MapSearch);

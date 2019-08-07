@@ -3,9 +3,8 @@ import LinesEllipsis from "react-lines-ellipsis";
 
 const TrailCard = ({
     data,
-    trailItemClick,
+    trailSaveBtn,
     embed,
-    actionText,
     // trailSelect,
     alreadySaved,
     isAuthenticated
@@ -14,17 +13,13 @@ const TrailCard = ({
     const lengthKM = Math.round(length * 1.6)
     const ascentM = Math.round(ascent * 1.6)
     const [heightToggle, setheightToggle] = useState(false);
-    const onCardClick = () => {
-        setheightToggle(!heightToggle)
-        console.log("card click", heightToggle, data)
-    }
+    const onCardClick = () => { setheightToggle(!heightToggle) }
     return (
         <div className="hike-card" onClick={onCardClick} style={(!heightToggle) ? { height: "146px" } : { height: "300px" }}>
             <div>
                 <div
                     className="hike-image"
                     style={{ backgroundImage: `url(${embed})` }}
-                // onClick={() => trailSelect(data)}
                 />
                 <div className="hike-content">
                     <LinesEllipsis
@@ -36,7 +31,7 @@ const TrailCard = ({
                     />
                     <span>Length: {lengthKM} km</span>
                     <span>Ascent: {ascentM} m</span>
-                    {isAuthenticated && <button className="btn-dark btn" onClick={() => trailItemClick(data)}>
+                    {isAuthenticated && <button id="saveBtn" className="btn-dark btn" onClick={() => trailSaveBtn(data)}>
                         {"Save"}
                     </button>}
                 </div>

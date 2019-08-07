@@ -116,6 +116,24 @@ export const addHike = (formData, history) => async dispatch => {
         })
     }
 }
+
+// Add Hike from API data
+
+export const addAPIHike = (hikeData) => async dispatch => {
+    try {
+        const config = { headers: { 'Content-Type': 'application/json' } }
+        const res = await axios.put('/api/profile/APIhikes', hikeData, config)
+        dispatch({ type: UPDATE_PROFILE, payload: res.data })
+        dispatch(setAlert('API Hike Added', 'success'))
+    } catch (error) {
+        const errors = error.response.data.errors;
+        if (errors) { errors.forEach(error => { dispatch(setAlert(error.msg, 'danger')) }) }
+        dispatch({
+            type: PROFILE_ERROR, payload: { msg: error.response.statusText, status: error.response.status }
+        })
+    }
+}
+
 // Add Courses
 
 export const addCourse = (formData, history) => async dispatch => {
@@ -137,6 +155,24 @@ export const addCourse = (formData, history) => async dispatch => {
 
 export const deleteHike = id => async dispatch => {
     try {
+        const res = await axios.delete(`/api/profile/APIhikes/${id}`)
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        })
+        dispatch(setAlert('Hike Removed', 'success'))
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        })
+    }
+}
+
+// Delete Hikes
+
+export const deleteAPIHike = id => async dispatch => {
+    try {
         const res = await axios.delete(`/api/profile/hikes/${id}`)
         dispatch({
             type: UPDATE_PROFILE,
@@ -150,6 +186,8 @@ export const deleteHike = id => async dispatch => {
         })
     }
 }
+
+
 
 export const deleteCourse = id => async dispatch => {
     try {

@@ -188,7 +188,7 @@ router.put('/hikes',
     [auth, [
         check('name', 'Title is required').not().isEmpty(),
         check('location', 'Location is required').not().isEmpty(),
-        check('from', 'From date is required').not().isEmpty(),
+        check('fromDate', 'From date is required').not().isEmpty(),
         check('status', 'Status is required').not().isEmpty()
     ]
     ],
@@ -202,8 +202,8 @@ router.put('/hikes',
             name,
             length,
             location,
-            from,
-            to,
+            fromDate,
+            toDate,
             description,
             status
         } = req.body;
@@ -212,8 +212,8 @@ router.put('/hikes',
             name,
             length,
             location,
-            from,
-            to,
+            fromDate,
+            toDate,
             description,
             status
         };
@@ -221,6 +221,42 @@ router.put('/hikes',
         try {
             const profile = await Profile.findOne({ user: req.user.id });
             profile.hikes.unshift(newExp);
+            await profile.save();
+            res.json(profile);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+
+// @route    PUT api/profile/hikes
+// @desc     Add profile hikes
+// @access   Private
+router.put('/APIhikes',
+    [auth, [
+        check('hikeData', 'Missing hike data').not().isEmpty(),
+    ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const {
+            hikeData,
+        } = req.body;
+
+        const newHike = {
+            hikeData,
+        };
+
+        try {
+            const profile = await Profile.findOne({ user: req.user.id });
+            console.log("profile", profile)
+            profile.hikingprojecttrails.unshift(newHike);
             await profile.save();
             res.json(profile);
         } catch (err) {

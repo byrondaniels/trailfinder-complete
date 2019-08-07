@@ -22,50 +22,72 @@ const MapRender = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(props => (
-    <Fragment>
-        <GoogleMap onClick={(t) => props.mapClicked(t)}
-            defaultZoom={6} defaultCenter={{
-                lat: props.mapCoordonates.latitude,
-                lng: props.mapCoordonates.longitude
-            }}>
+)(props => {
 
-            {props.mapCoordonates.displayCircle && <Circle
-                clickable
-                onClick={(t) => props.mapClicked(t)}
-                center={{
-                    lat: props.mapCoordonates.latitude,
-                    lng: props.mapCoordonates.longitude
-                }}
-                radius={100 * 3000}
-                options={{
-                    strokeColor: '#95a3b3',
-                    fillOpacity: 0.2,
-                    fillColor: '#7d4174'
-                }}
-            />}
+    const { mapClicked, trails, viewSavedTrails, mapCoordonates: { latitude, longitude, displayCircle }, userProfile } = props
 
-            {props.trails &&
-                props.trails.map((index, i) => {
-                    return (
-                        <Marker
-                            key={i}
-                            title={props.trails[i].name}
-                            position={{
-                                lat: props.trails[i].latitude,
-                                lng: props.trails[i].longitude
-                            }}
-                            icon={setMapIconColor(props.trails[i].length)}
-                            onClick={() => {
-                                window.open(props.trails[i].url, '_blank')
-                                // props.selectTrail(props.trails[i]);
-                            }}
-                        />
-                    );
-                })}
-            <Marker position={{ lat: 51.044270, lng: -114.062019 }} />
-        </GoogleMap>
-    </Fragment>
-));
+    return (
+        <Fragment>
+            <GoogleMap onClick={(t) => mapClicked(t)}
+                defaultZoom={6} defaultCenter={{
+                    lat: latitude,
+                    lng: longitude
+                }}>
+
+                {displayCircle && <Circle
+                    clickable
+                    onClick={(t) => props.mapClicked(t)}
+                    center={{
+                        lat: latitude,
+                        lng: longitude
+                    }}
+                    radius={100 * 3000}
+                    options={{
+                        strokeColor: '#95a3b3',
+                        fillOpacity: 0.2,
+                        fillColor: '#7d4174'
+                    }}
+                />}
+
+                {trails &&
+                    trails.map((trail, i) => {
+                        return (
+                            <Marker
+                                key={i}
+                                title={trail.name}
+                                position={{
+                                    lat: trail.latitude,
+                                    lng: trail.longitude
+                                }}
+                                icon={setMapIconColor(trail.length)}
+                                onClick={() => {
+                                    window.open(trail.url, '_blank')
+                                    // props.selectTrail(trail);
+                                }}
+                            />
+                        );
+                    })}
+                {viewSavedTrails && userProfile.hikingprojecttrails &&
+                    userProfile.hikingprojecttrails.map((stringTrail, i) => {
+                        const trail = JSON.parse(stringTrail.hikeData);
+                        return (
+                            <Marker
+                                key={i}
+                                title={trail.name}
+                                position={{
+                                    lat: trail.latitude,
+                                    lng: trail.longitude
+                                }}
+                                onClick={() => {
+                                    window.open(trail.url, '_blank')
+                                    // props.selectTrail(trail);
+                                }}
+                            />
+                        );
+                    })}
+            </GoogleMap>
+        </Fragment>
+    )
+});
 
 export default MapRender; 

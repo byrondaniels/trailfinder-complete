@@ -141,6 +141,10 @@ img {
   margin: 3rem 0;
 }
 
+#saveBtn{
+  width: 100px;
+}
+
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -538,7 +542,7 @@ button {
 
 /* Map Search Styling */
 
-.filterBtn{
+.mapBtn{
   position: absolute;
   z-index: 1;
   background: white;
@@ -553,40 +557,59 @@ button {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
   min-width: 66px;
   top: 10px;
-  left: 180px;
   height: 40px;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.filterMenu{
+.map1{
+  left: 180px;
+}
+
+.map2{
+  left: 250px;
+}
+
+.dropdown-content li:hover{
+  background: rgb(212, 210, 210);
+  cursor: pointer;
+} 
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
-  width: 146px;
   position: absolute;
-  top: 55px;
+  top: 50px;
   left: 180px;
   justify-content: left;
-  background: var(--primary-color);
-  border: solid 3px var(--dark-color);
+  background: white;
   padding-left: 3px; 
   z-index: 2;
   overflow: hidden;
-  transition: height 1s, border-width 1s;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-.filterMenu > span{
+.mapBtn:hover{
+  background: rgb(212, 210, 210);
+}
+
+.dropdown-content > span{
   font-weight: bold;
-  text-decoration: underline;
 }
 
 .filterMenu > ul{
   display: flex;
   flex-direction: column;
 }
-.filterMenu li{
-  width: 130px;
+.dropdown-content li{
+  padding: 3px;
+  margin-top: 5px;
+  margin-bottom: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -596,8 +619,20 @@ button {
   margin-right: 10px; 
 }
 
-.red{
-  color: red;
+.dropdown-content ul li span {
+  position: absolute;
+  padding-left: 20px;
+}
+
+.dropdown-content input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.2); /* IE */
+  -moz-transform: scale(1.2); /* FF */
+  -webkit-transform: scale(1.2); /* Safari and Chrome */
+  -o-transform: scale(1.2); /* Opera */
+  transform: scale(1.2);
+  background: wheat;
 }
 
 #circ{
