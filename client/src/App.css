@@ -15,7 +15,11 @@
 
 body {
   font-family: 'Raleway', sans-serif;
+<<<<<<< HEAD
   font-size: 16px;
+=======
+  font-size: 1rem;
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   line-height: 1.6;
   background-color: #fff;
   color: #333;
@@ -43,6 +47,7 @@ img {
   margin-top: 6rem;
   margin-bottom: 3rem;
 }
+<<<<<<< HEAD
 .container2 {
   max-width: 1100px;
   margin: auto;
@@ -59,6 +64,9 @@ img {
   height: calc(100vh - 70px);
   overflow-x: hidden;
 }
+=======
+
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -141,10 +149,13 @@ img {
   margin: 3rem 0;
 }
 
+<<<<<<< HEAD
 #saveBtn{
   width: 100px;
 }
 
+=======
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -254,8 +265,11 @@ img {
 }
 
 /* Forms */
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
 .form .form-group {
   margin: 1.2rem 0;
 }
@@ -266,6 +280,7 @@ img {
   color: #888;
 }
 
+<<<<<<< HEAD
 .social-input span {
   display: block;
   padding: 0.4rem;
@@ -274,6 +289,8 @@ img {
 }
 
 .form input[type='number'],
+=======
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
@@ -332,9 +349,14 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   padding: 15px 100px;
   position: fixed;
   height: 70px;
+=======
+  padding: 0.7rem 2rem;
+  position: fixed;
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   z-index: 1;
   width: 100%;
   top: 0;
@@ -363,7 +385,11 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
+<<<<<<< HEAD
   background: url('./img/dolmites.jpg') no-repeat center center/cover;
+=======
+  background: url('./img/showcase.jpg') no-repeat center center/cover;
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   height: 100vh;
 }
 
@@ -396,7 +422,11 @@ button {
   grid-template-areas:
     'top top'
     'about about'
+<<<<<<< HEAD
     'exp cor'
+=======
+    'exp edu'
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
     'github github';
   grid-gap: 1rem;
 }
@@ -439,29 +469,50 @@ button {
   grid-area: exp;
 }
 
+<<<<<<< HEAD
 .profile-cor {
   grid-area: cor;
 }
 
 .profile-exp h2,
 .profile-cor h2 {
+=======
+.profile-edu {
+  grid-area: edu;
+}
+
+.profile-exp h2,
+.profile-edu h2 {
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   margin-bottom: 1rem;
 }
 
 .profile-exp > div,
+<<<<<<< HEAD
 .profile-cor > div {
+=======
+.profile-edu > div {
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
 
 .profile-exp > div:last-child,
+<<<<<<< HEAD
 .profile-cor > div:last-child {
+=======
+.profile-edu > div:last-child {
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   border: 0;
 }
 
 .profile-exp p,
+<<<<<<< HEAD
 .profile-cor p {
+=======
+.profile-edu p {
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   margin: 0.5rem 0;
 }
 
@@ -517,6 +568,7 @@ button {
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
+<<<<<<< HEAD
 .post-img{
   height: 50px;
   width: 50px;
@@ -744,6 +796,11 @@ position: absolute;
 
 /* Mobile Styles */
 @media (max-width: 800px) {
+=======
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
   .container {
     margin-top: 8rem;
   }
@@ -807,7 +864,11 @@ position: absolute;
       'top'
       'about'
       'exp'
+<<<<<<< HEAD
       'cor'
+=======
+      'edu'
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
       'github';
   }
 

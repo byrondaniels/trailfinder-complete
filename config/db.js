@@ -13,12 +13,20 @@ const connectDB = async () => {
         })
         console.log("The goose is connected")
     } catch (err) {
+<<<<<<< HEAD
         console.error("The goose is cooked", err.message)
+=======
+        console.error(err.message)
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
         process.exit(1)
     }
 }
 
+<<<<<<< HEAD
 module.exports = connectDB;
 
 
 
+=======
+module.exports = connectDB; 
+>>>>>>> 8ed282e71425a9873233f885dc2b5c417bfc710e
