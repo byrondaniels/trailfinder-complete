@@ -24,7 +24,7 @@ const TrailCard = ({
                 <div className="hike-content">
                     <LinesEllipsis
                         text={name}
-                        maxLine="3"
+                        maxLine="2"
                         ellipsis="..."
                         trimRight
                         basedOn="letters"

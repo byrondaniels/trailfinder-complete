@@ -145,8 +145,10 @@ img {
 #saveBtn{
     width: 90px;
     position: absolute;
-    right: -2px;
-    bottom: 6px;
+    /* right: -2px; */
+    left: 10px;
+    margin-right: 0px;
+    bottom: 8px;
     padding: 2px;
 }
 #elop{
