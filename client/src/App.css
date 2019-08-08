@@ -145,10 +145,12 @@ img {
 #saveBtn{
     width: 90px;
     position: absolute;
-    margin-right: 0px;
     right: -2px;
     bottom: 6px;
     padding: 2px;
+}
+#elop{
+  background: orange;
 }
 
 .btn {

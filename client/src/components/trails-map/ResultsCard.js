@@ -28,6 +28,7 @@ const TrailCard = ({
                         ellipsis="..."
                         trimRight
                         basedOn="letters"
+                        id = "ellop"
                     />
                     <span>Length: {lengthKM} km</span>
                     <span>Ascent: {ascentM} m</span>
