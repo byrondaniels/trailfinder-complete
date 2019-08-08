@@ -143,7 +143,12 @@ img {
 }
 
 #saveBtn{
-  width: 100px;
+    width: 90px;
+    position: absolute;
+    margin-right: 0px;
+    right: -2px;
+    bottom: 6px;
+    padding: 2px;
 }
 
 .btn {
@@ -174,6 +179,7 @@ img {
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+  z-index: 6666;
 }
 
 .btn-primary,
@@ -655,7 +661,7 @@ button {
   height: 50px;
   background: var(--primary-color);
   border: solid 3px var(--dark-color);
-  padding-bottom: 3px;
+  padding-bottom: 50px;
 }
 .resultsOverview >div {
   display: flex;
@@ -707,7 +713,7 @@ position: absolute;
   flex-direction: column;
   border: black solid 2px;
   padding-bottom: 10px;
-  padding-right: 2px;
+  padding-right: 12px;
   background: var(--light-color);
   transition: height 1s;
   overflow: hidden;

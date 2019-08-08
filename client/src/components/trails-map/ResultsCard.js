@@ -31,8 +31,11 @@ const TrailCard = ({
                     />
                     <span>Length: {lengthKM} km</span>
                     <span>Ascent: {ascentM} m</span>
-                    {isAuthenticated && <button id="saveBtn" className="btn-dark btn" onClick={() => trailSaveBtn(data)}>
-                        {"Save"}
+                    {isAuthenticated && 
+                    <button id="saveBtn" 
+                    className="btn-dark btn" 
+                    onClick={(e) =>{e.stopPropagation(); trailSaveBtn(data)}}>
+                    {"Save"}
                     </button>}
                 </div>
             </div>

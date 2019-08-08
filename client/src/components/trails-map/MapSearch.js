@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import MapRender from "./MapRender"
@@ -51,8 +51,8 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     return (
         <div className="mapContainer2">
-            <div className="mapBtn map2" onClick={toggleSaved} >Saved Trails</div>
-            <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
+            {isAuthenticated &&<div className="mapBtn map2" onClick={toggleSaved} >Saved Trails</div>}
+             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
             <div className="resultsContainer">
                 <MapRender
                     trails={filteredTrails}
