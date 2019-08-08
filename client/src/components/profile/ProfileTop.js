@@ -35,21 +35,21 @@ const ProfileTop = ({ profile: { externalImg, status, location, blog, social, us
                 }
                 {
                     social && social.linkedin && (
-                        href={`https://www.linkedin.com/${social.linkedin}`} target='_blank' rel='noopener noreferrer'>
+                        <a href={`https://www.linkedin.com/${social.linkedin}`} target='_blank' rel='noopener noreferrer'>
                             <i className='fas fa-globe fa-2x' />
                         </a>
                     )
                 }
                 {
                     social && social.youtube && (
-                        href={`https://www.youtube.com/${social.youtube}`} target='_blank' rel='noopener noreferrer'>
+                        <a href={`https://www.youtube.com/${social.youtube}`} target='_blank' rel='noopener noreferrer'>
                             <i className='fas fa-globe fa-2x' />
                         </a>
                     )
                 }
                 {
                     social && social.instagram && (
-                        href={`https://www.instagram.com/${social.instagram}`} target='_blank' rel='noopener noreferrer'>
+                        <a href={`https://www.instagram.com/${social.instagram}`} target='_blank' rel='noopener noreferrer'>
                             <i className='fas fa-globe fa-2x' />
                         </a>
                     )
