@@ -77,11 +77,11 @@ router.post(
 
         // Build social object
         profileFields.social = {};
-        if (youtube) profileFields.social.youtube = "https://www.youtube.com/" + youtube;
-        if (twitter) profileFields.social.twitter = "https://www.twitter.com/" + twitter;
-        if (facebook) profileFields.social.facebook = "https://www.facebook.com/" + facebook;
-        if (linkedin) profileFields.social.linkedin = "https://www.linkedin.com/" + linkedin;
-        if (instagram) profileFields.social.instagram = "https://www.instagram.com/" + instagram;
+        if (youtube) profileFields.social.youtube = youtube;
+        if (twitter) profileFields.social.twitter = twitter;
+        if (facebook) profileFields.social.facebook = facebook;
+        if (linkedin) profileFields.social.linkedin = linkedin;
+        if (instagram) profileFields.social.instagram = instagram;
 
         if (externalImg) {
             try {
