@@ -40,7 +40,7 @@ const TrailCard = ({
                     </button>}
                 </div>
             </div>
-            <div>Description: {summary} </div>
+            <div className="mas-10">Description: {summary} </div>
 
         </div>
     )

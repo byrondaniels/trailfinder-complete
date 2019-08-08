@@ -779,11 +779,19 @@ position: absolute;
   .navbar {
     display: block;
     text-align: center;
+    z-index: 700000;
+  
+    
+  }
+  .mas-10{
+    padding: 0px 10px;
+    margin: 0px 10px;
   }
 
   .navbar ul {
     text-align: center;
     justify-content: center;
+    background: var(--dark-color);
   }
 
   .navbar h1 {
