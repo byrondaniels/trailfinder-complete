@@ -24,9 +24,6 @@ const ProfileSchema = new mongoose.Schema({
     externalImg: {
         type: String
     },
-    githubusername: {
-        type: String
-    },
     hikingprojecttrails: [
         {
             hikeData: {

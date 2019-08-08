@@ -7,7 +7,6 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileHikes from './ProfileHikes';
 import ProfileCourses from './ProfileCourses';
-import ProfileGithub from './ProfileGithub';
 import { getProfileById } from '../../actions/profile';
 
 const Profile = ({
@@ -67,10 +66,6 @@ const Profile = ({
                                 ) : (<h4>No courses found</h4>)
                                 }
                             </div>
-
-                            {profile.githubusername && (
-                                <ProfileGithub username={profile.githubusername} />
-                            )}
                         </div>
                     </Fragment>
                 )}
