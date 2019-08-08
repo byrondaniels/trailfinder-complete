@@ -23,7 +23,7 @@ const ProfileTop = ({ profile: { externalImg, status, location, blog, social, us
                     social && 
                         Object.keys(social).map((key)=>{
                         return <a href={`https://www.${key}.com/${social[key]}`} target='_blank' rel='noopener noreferrer'>
-                            <i className='fas fa-globe fa-2x' />
+                            <i className={`fab fa-${key} fa-2x`} />
                         </a>
                     })
                 }

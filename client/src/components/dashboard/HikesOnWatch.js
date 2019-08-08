@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {deleteExperience} from '../../actions/profile'
 
 
-const Experience = ({ experience, deleteExperience }) => {
+const HikesOnWatch = ({ experience, deleteExperience }) => {
   const experiences = experience.map(exp => (
     <tr key={exp._id}>
       <td>{exp.company}</td>
@@ -48,7 +48,7 @@ const Experience = ({ experience, deleteExperience }) => {
   );
 };
 
-Experience.propTypes = {
+HikesOnWatch.propTypes = {
   experience: PropTypes.array.isRequired,
   deleteExperience: PropTypes.func.isRequired
 };
