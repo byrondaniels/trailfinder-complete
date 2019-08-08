@@ -1,5 +1,5 @@
 import {
-    GET_PROFILE, GET_PROFILES, GET_REPOS,
+    GET_PROFILE, GET_PROFILES,
     GET_RANDOM_IMAGES, PROFILE_ERROR, CLEAR_PROFILE,
     UPDATE_PROFILE, GET_HIKING_PROJECT_TRAILS
 } from "../actions/types";
@@ -8,7 +8,6 @@ import {
 const initialState = {
     profile: null,
     profiles: [],
-    repos: [],
     images: [],
     hikingProject: [],
     loading: true,
@@ -41,13 +40,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 profile: null,
-                repos: [],
-                loading: false
-            }
-        case GET_REPOS:
-            return {
-                ...state,
-                repos: payload,
                 loading: false
             }
         case GET_HIKING_PROJECT_TRAILS:

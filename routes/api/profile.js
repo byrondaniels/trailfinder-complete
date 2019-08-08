@@ -102,7 +102,6 @@ router.post(
 
         try {
             let profile = await Profile.findOne({ user: req.user.id });
-
             if (profile) {
                 // Update
                 profile = await Profile.findOneAndUpdate(
@@ -113,7 +112,6 @@ router.post(
 
                 return res.json(profile);
             }
-
             // Create
             profile = new Profile(profileFields);
 
@@ -242,19 +240,12 @@ router.put('/APIhikes',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
-        const {
-            hikeData,
-        } = req.body;
-
-        const newHike = {
-            hikeData,
-        };
-
+        const { hikeData, } = req.body;
+        const newHike = { hikeData, };
         try {
             const profile = await Profile.findOne({ user: req.user.id });
-            console.log("profile", profile)
-            profile.hikingprojecttrails.unshift(newHike);
+            const foundHike = profile.hikingprojecttrails2.filter(item=>item.hikeData === hikeData )
+            if(foundHike.length ===0) await profile.hikingprojecttrails2.unshift(newHike);
             await profile.save();
             res.json(profile);
         } catch (err) {
@@ -263,6 +254,28 @@ router.put('/APIhikes',
         }
     }
 );
+
+// @route    DELETE api/profile/APIhikes/:hike_id
+// @desc     Delete APIhikes from profile
+// @access   Private
+router.delete('/APIhikes/:hike_id', auth, async (req, res) => {
+    try {
+        const foundProfile = await Profile.findOne({ user: req.user.id });
+        const expIds = foundProfile.hikingprojecttrails2.map(exp => exp._id.toString());
+        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /hikes/5
+        const removeIndex = expIds.indexOf(req.params.hike_id);
+        if (removeIndex === -1) {
+            return res.status(500).json({ msg: "Server error" });
+        } else {
+            foundProfile.hikingprojecttrails2.splice(removeIndex, 1);
+            await foundProfile.save();
+            return res.status(200).json(foundProfile);
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: "Server error" });
+    }
+});
 
 // @route    DELETE api/profile/hikes/:hike_id
 // @desc     Delete hikes from profile
@@ -334,7 +347,6 @@ router.put(
     }
 );
 
-
 router.delete("/courses/:course_id", auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
@@ -344,7 +356,6 @@ router.delete("/courses/:course_id", auth, async (req, res) => {
         if (removeIndex === -1) {
             return res.status(500).json({ msg: "Server error" });
         } else {
-
             foundProfile.courses.splice(
                 removeIndex,
                 1,

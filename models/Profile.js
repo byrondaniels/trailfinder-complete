@@ -24,11 +24,18 @@ const ProfileSchema = new mongoose.Schema({
     externalImg: {
         type: String
     },
-    hikingprojecttrails: [
+    hikingprojecttrails2: [
         {
             hikeData: {
                 type: String,
-                required: true
+                required: true,
+            }
+        }],
+    hikingprojecttrails1: [
+        {
+            hikeData: {
+                type: String,
+                required: true,
             }
         }],
     hikes: [

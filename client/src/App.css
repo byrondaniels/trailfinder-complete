@@ -553,6 +553,7 @@ button {
   display: flex;
   align-items: center;
   cursor: pointer;
+
 }
 
 .map1{
@@ -560,7 +561,11 @@ button {
 }
 
 .map2{
-  left: 250px;
+  left: 355px;
+  border: solid 1px;
+}
+.map3{
+  left: 255px;
 }
 
 .dropdown-content li:hover{
@@ -577,7 +582,7 @@ button {
   flex-direction: column;
   position: absolute;
   top: 50px;
-  left: 180px;
+
   justify-content: left;
   background: white;
   padding-left: 3px; 
@@ -585,9 +590,15 @@ button {
   overflow: hidden;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
+.drop1{
+  left: 180px;
+}
+.drop2{
+  left: 254px;
+}
 
 .mapBtn:hover{
-  background: rgb(212, 210, 210);
+  background: rgb(212, 210, 210) !important;
 }
 
 .dropdown-content > span{
@@ -730,6 +741,19 @@ position: absolute;
   position: absolute;
   bottom: 2px;
   left: 5px;
+}
+
+.h-146{
+  height: 146px;
+}
+.h-300{
+  height: 300px;
+}
+.bg-white{
+  background: white;
+}
+.bg-grey{
+  background: grey;
 }
 
 

@@ -52,7 +52,7 @@ const Profile = ({
                                 ) : (<h4>No hikes completed</h4>)}
                             </div>
 
-                            <div className='profile-edu bg-white p-2'>
+                            <div className='profile-cor bg-white p-2'>
                                 <h2 className='text-primary'>Courses</h2>
                                 {profile.courses.length > 0 ? (
                                     <Fragment>

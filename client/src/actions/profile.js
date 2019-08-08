@@ -3,7 +3,7 @@ import { setAlert } from './alert'
 import {
     PROFILE_ERROR, GET_PROFILE, GET_PROFILES,
     UPDATE_PROFILE, ACCOUNT_DELETED, CLEAR_PROFILE,
-    GET_REPOS, GET_RANDOM_IMAGES, GET_HIKING_PROJECT_TRAILS
+    GET_RANDOM_IMAGES, GET_HIKING_PROJECT_TRAILS
 } from './types'
 import { hikingProjectKey } from "../config"
 
@@ -58,6 +58,7 @@ export const getHikingProjectTrails = (lat, long, distance = 200) => async dispa
         })
     }
 }
+
 // Get random images from Unsplash
 
 export const getRandomUnsplashImages = (subject) => async dispatch => {
@@ -70,6 +71,7 @@ export const getRandomUnsplashImages = (subject) => async dispatch => {
         })
     }
 }
+
 //  Create or update a profile
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
@@ -87,6 +89,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
         })
     }
 }
+
 // Add Hike
 
 export const addHike = (formData, history) => async dispatch => {
@@ -143,7 +146,7 @@ export const addCourse = (formData, history) => async dispatch => {
 
 export const deleteHike = id => async dispatch => {
     try {
-        const res = await axios.delete(`/api/profile/APIhikes/${id}`)
+        const res = await axios.delete(`/api/profile/hikes/${id}`)
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data
@@ -157,11 +160,12 @@ export const deleteHike = id => async dispatch => {
     }
 }
 
-// Delete Hikes
+// Delete API Hikes
 
 export const deleteAPIHike = id => async dispatch => {
     try {
-        const res = await axios.delete(`/api/profile/hikes/${id}`)
+        console.log("deleteapi called", id)
+        const res = await axios.delete(`/api/profile/APIhikes/${id}`)
         dispatch({
             type: UPDATE_PROFILE,
             payload: res.data

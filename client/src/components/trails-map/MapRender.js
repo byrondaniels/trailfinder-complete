@@ -44,7 +44,7 @@ const MapRender = compose(
                     radius={100 * 3000}
                     options={{
                         strokeColor: '#95a3b3',
-                        fillOpacity: 0.2,
+                        fillOpacity: 0.1,
                         fillColor: '#7d4174'
                     }}
                 />}
@@ -67,8 +67,8 @@ const MapRender = compose(
                             />
                         );
                     })}
-                {viewSavedTrails && userProfile.hikingprojecttrails &&
-                    userProfile.hikingprojecttrails.map((stringTrail, i) => {
+                {viewSavedTrails && userProfile &&userProfile.hikingprojecttrails2 &&
+                    userProfile.hikingprojecttrails2.map((stringTrail, i) => {
                         const trail = JSON.parse(stringTrail.hikeData);
                         return (
                             <Marker

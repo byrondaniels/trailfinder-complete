@@ -6,7 +6,7 @@ const FilterMenu = ({ filterValues, handleChangeCheckbox }) => {
     return (
         <div className="dropdown" >
             <div className="mapBtn map1" >Filter</div>
-            <div className="dropdown-content">
+            <div className="dropdown-content drop1">
                 <span>Filter by Length: </span>
                 <ul>
                     {filterValues.map(item => (

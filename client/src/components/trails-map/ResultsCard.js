@@ -1,21 +1,37 @@
 import React, { useState } from "react";
 import LinesEllipsis from "react-lines-ellipsis";
+import classNames from 'classnames'
 
-const TrailCard = ({
+const ResultsCard = ({
     data,
-    trailSaveBtn,
+    trailBtn,
     embed,
+    actionText,
+    payload,
     // trailSelect,
     alreadySaved,
-    isAuthenticated
+    isAuthenticated,
+    profile
 }) => {
+
     const { name, length, ascent, summary } = data
     const lengthKM = Math.round(length * 1.6)
-    const ascentM = Math.round(ascent * 1.6)
+    const ascentM  = Math.round(ascent * 1.6)
     const [heightToggle, setheightToggle] = useState(false);
-    const onCardClick = () => { setheightToggle(!heightToggle) }
+    const onCardClick = () => {  setheightToggle(!heightToggle) }
+
     return (
-        <div className="hike-card" onClick={onCardClick} style={(!heightToggle) ? { height: "146px" } : { height: "300px" }}>
+        <div 
+            onClick={onCardClick} 
+            className={
+                classNames({
+                'hike-card': true,
+                'h-146': !heightToggle,
+                'h-300': heightToggle,
+                'bg-white': !alreadySaved.length,
+                'bg-grey': alreadySaved.length,
+                })}
+            >
             <div>
                 <div
                     className="hike-image"
@@ -28,21 +44,19 @@ const TrailCard = ({
                         ellipsis="..."
                         trimRight
                         basedOn="letters"
-                        id = "ellop"
                     />
                     <span>Length: {lengthKM} km</span>
                     <span>Ascent: {ascentM} m</span>
-                    {isAuthenticated && 
-                    <button id="saveBtn" 
+                    {isAuthenticated && !alreadySaved.length && 
+                    <button id="saveBtn"
                     className="btn-dark btn" 
-                    onClick={(e) =>{e.stopPropagation(); trailSaveBtn(data)}}>
-                    {"Save"}
+                    onClick={(e) =>{e.stopPropagation(); trailBtn(payload)}}>
+                    {actionText}
                     </button>}
                 </div>
             </div>
             <div className="mas-10">Description: {summary} </div>
-
         </div>
     )
 };
-export default TrailCard;
+export default ResultsCard;

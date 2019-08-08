@@ -5,11 +5,14 @@ import MapRender from "./MapRender"
 import ResultsOverview from "./ResultsOverview"
 import ResultsList from "./ResultsList"
 import FilterMenu from "./FilterMenu"
+import SavedTrailsBtn from "./SavedTrailsBtn"
 import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
 
-
 const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
+
+    useEffect(() => { getCurrentProfile()},[getCurrentProfile]);
+    const [filterValues, setFilter] = useState(initialFilterValues);
 
     const [mapCoordonates, setMapCoordonates] = useState({
         latitude: 48,
@@ -24,9 +27,6 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                 (trail.length > f.min)
             ))
     }, [])
-
-
-    const [filterValues, setFilter] = useState(initialFilterValues);
 
     const filteredTrails = useMemo(() => (filterTrails(hikingProject, filterValues)), [hikingProject, filterValues, filterTrails])
     const handleChangeCheckbox = id => {
@@ -51,8 +51,11 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     return (
         <div className="mapContainer2">
-            {isAuthenticated &&<div className="mapBtn map2" onClick={toggleSaved} >Saved Trails</div>}
-             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
+
+            {isAuthenticated && 
+            <SavedTrailsBtn viewSavedTrails = {viewSavedTrails} toggleSaved = {toggleSaved} /> }
+            <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
+
             <div className="resultsContainer">
                 <MapRender
                     trails={filteredTrails}
@@ -60,9 +63,13 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                     mapCoordonates={mapCoordonates}
                     viewSavedTrails={viewSavedTrails}
                     userProfile={userProfile}
-
                 />
-                <ResultsList trails={filteredTrails} isAuthenticated={isAuthenticated} />
+                <ResultsList 
+                viewSavedTrails={viewSavedTrails}
+                userProfile={userProfile} 
+                trails={filteredTrails} 
+                isAuthenticated={isAuthenticated} 
+                />
             </div>
             <ResultsOverview filteredTrails={filteredTrails} hikingProject={hikingProject} />
         </div>
