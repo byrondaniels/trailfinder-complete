@@ -356,13 +356,13 @@ router.delete("/courses/:course_id", auth, async (req, res) => {
         console.error(error);
         return res.status(500).json({ msg: "Server error" });
     }
-});`
+});
 
 
 // @route    GET api/profile/hiking-project/:lat/:long/:distance
 // @desc     Get trails from hiking project api using coordonates
-// @access   Private
-// router.get('/hiking-project/:lat/:long/:distance',auth, (req, res) => {
+// @access   Public
+// router.get('/hiking-project/:lat/:long/:distance', (req, res) => {
 
 
 
