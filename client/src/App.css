@@ -830,6 +830,21 @@ position: absolute;
 background: #ccc;
 cursor: pointer;
 }
+.hike-image .hover-image{
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.215s;
+  height: 100%;
+  font-size: 440%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: purple;
+}
+
+.hike-image:hover .hover-image{
+  opacity: 0.333;
+}
 
 
 /* Mobile Styles */

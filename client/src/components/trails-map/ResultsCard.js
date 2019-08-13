@@ -9,7 +9,6 @@ const ResultsCard = ({
     embed,
     actionText,
     payload,
-    // trailSelect,
     alreadySaved,
     isAuthenticated,
     togglePicture
@@ -19,10 +18,7 @@ const ResultsCard = ({
     const lengthKM = Math.round(length * 1.6)
     const ascentM = Math.round(ascent * 1.6)
     const [heightToggle, setheightToggle] = useState(false);
-    const onCardClick = () => {
-        console.log("data", data)
-        setheightToggle(!heightToggle)
-    }
+    const onCardClick = () => { setheightToggle(!heightToggle) }
 
     return (
         <div
@@ -41,7 +37,7 @@ const ResultsCard = ({
                     className="hike-image"
                     style={{ backgroundImage: `url(${embed})` }}
                     onClick={(e) => { e.stopPropagation(); togglePicture(imgMedium) }}>
-
+                    <div className="fa fa-search hover-image" />
                 </div>
 
                 <div className="hike-content">
