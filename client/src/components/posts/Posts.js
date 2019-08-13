@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -14,7 +14,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     return loading ? (
         <Spinner />
     ) : (
-            <Fragment>
+            <div className="res-width">
                 <h1 className='large text-primary'>Posts</h1>
                 <p className='lead'>
                     <i className='fas fa-user' /> Welcome to the TrailFinder community
@@ -25,7 +25,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
                         <PostItem key={post._id} post={post} />
                     ))}
                 </div>
-            </Fragment>
+            </div>
         );
 };
 

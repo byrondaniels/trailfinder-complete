@@ -7,7 +7,9 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileHikes from './ProfileHikes';
 import ProfileCourses from './ProfileCourses';
+
 import { getProfileById } from '../../actions/profile';
+import ProfileHikingProject from './ProfileHikingProject';
 
 const Profile = ({
     getProfileById,
@@ -20,7 +22,7 @@ const Profile = ({
     }, [getProfileById, match.params.id]);
 
     return (
-        <Fragment>
+        <div className="res-width">
             {profile === null || loading ? (
                 <Spinner />
             ) : (
@@ -66,10 +68,14 @@ const Profile = ({
                                 ) : (<h4>No courses found</h4>)
                                 }
                             </div>
+
                         </div>
+                        {profile.hikingprojecttrails2 && (
+                            <ProfileHikingProject trails={profile.hikingprojecttrails2} />
+                        )}
                     </Fragment>
                 )}
-        </Fragment>
+        </div>
     );
 };
 

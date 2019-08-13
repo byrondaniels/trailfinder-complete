@@ -72,7 +72,7 @@ const EditProfile = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getCurrentProfile]);
     return !loading && profile !== null ? (
-        <Fragment>
+        <div className="res-width">
             <h1 className='large text-primary'>Edit Your Profile</h1>
             <p className='lead'>
                 <i className='fas fa-user' /> Edit your profile below
@@ -129,7 +129,7 @@ const EditProfile = ({
                         Please use comma separated values (eg. Scrambling, Backcountry, Mountaineering, TrailRunning)
                     </small>
                 </div>
-            
+
                 <div className='form-group'>
                     <textarea
                         placeholder='A short bio of yourself'
@@ -148,58 +148,58 @@ const EditProfile = ({
                         Change Social Network Links
                     </button>
                 </div>
-                        <Fragment>
-                            <div className='form-group social-input'>
-                                <i className='fab fa-twitter fa-2x' />
-                                <span className='form-text'>{twitterURL}</span>
-                                <input
-                                    type='text'
-                                    name='twitter'
-                                    value={twitter}
-                                    onChange={e => onChange(e)}
-                                />
-                            </div>
-                            <div className='form-group social-input'>
-                                <i className='fab fa-facebook fa-2x' />
-                                <span className='form-text'>{facebookURL}</span>
-                                <input
-                                    type='text'
-                                    name='facebook'
-                                value={facebook}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-youtube fa-2x' />
-                            <span className='form-text'>{youtubeURL}</span>
-                            <input
-                                type='text'
-                                name='youtube'
-                                value={youtube}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-linkedin fa-2x' />
-                            <span className='form-text'>{linkedinURL}</span>
-                            <input
-                                type='text'
-                                name='linkedin'
-                                value={linkedin}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-instagram fa-2x' />
-                            <span className='form-text'>{instagramURL}</span>
-                            <input
-                                type='text'
-                                name='instagram'
-                                value={instagram}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                    </Fragment>
+                <Fragment>
+                    <div className='form-group social-input'>
+                        <i className='fab fa-twitter fa-2x' />
+                        <span className='form-text'>{twitterURL}</span>
+                        <input
+                            type='text'
+                            name='twitter'
+                            value={twitter}
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className='form-group social-input'>
+                        <i className='fab fa-facebook fa-2x' />
+                        <span className='form-text'>{facebookURL}</span>
+                        <input
+                            type='text'
+                            name='facebook'
+                            value={facebook}
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className='form-group social-input'>
+                        <i className='fab fa-youtube fa-2x' />
+                        <span className='form-text'>{youtubeURL}</span>
+                        <input
+                            type='text'
+                            name='youtube'
+                            value={youtube}
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className='form-group social-input'>
+                        <i className='fab fa-linkedin fa-2x' />
+                        <span className='form-text'>{linkedinURL}</span>
+                        <input
+                            type='text'
+                            name='linkedin'
+                            value={linkedin}
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                    <div className='form-group social-input'>
+                        <i className='fab fa-instagram fa-2x' />
+                        <span className='form-text'>{instagramURL}</span>
+                        <input
+                            type='text'
+                            name='instagram'
+                            value={instagram}
+                            onChange={e => onChange(e)}
+                        />
+                    </div>
+                </Fragment>
                 <small className='form-text'>{externalImg && "An image is set for your profile"}</small>
                 <div className='my-2'>
                     <button
@@ -223,7 +223,7 @@ const EditProfile = ({
                     Go Back
                 </Link>
             </form>
-        </Fragment>
+        </div>
     ) : (<Redirect to='/dashboard' />);
 };
 EditProfile.propTypes = {

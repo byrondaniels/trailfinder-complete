@@ -164,7 +164,6 @@ export const deleteHike = id => async dispatch => {
 
 export const deleteAPIHike = id => async dispatch => {
     try {
-        console.log("deleteapi called", id)
         const res = await axios.delete(`/api/profile/APIhikes/${id}`)
         dispatch({
             type: UPDATE_PROFILE,

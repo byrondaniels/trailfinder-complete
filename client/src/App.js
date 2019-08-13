@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from './store'
@@ -38,34 +38,33 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
-          <NavBar />
+        <NavBar />
+        <div className="container" >
           <Switch>
             <Route exact path='/' component={Landing} />
-            <div className="container">
-              <Alert />
-              <Switch>
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/profiles" component={Profiles} />
-                <Route exact path="/profile/:id" component={Profile} />
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                <PrivateRoute exact path="/create-profile" component={CreateProfile} />
-                <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-                <PrivateRoute exact path="/add-hike" component={AddHike} />
-                <PrivateRoute exact path="/add-course" component={AddCourse} />
-                <PrivateRoute exact path="/posts" component={Posts} />
-                <PrivateRoute exact path="/make-post" component={PostForm} />
-                <PrivateRoute exact path="/posts/:id" component={Post} />
-                <Route exact path="/trails-map" component={MapSearch} />
-                <Route component={UnknownRoute} />
-
-              </Switch>
-            </div>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:id" component={Profile} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+            <PrivateRoute exact path="/add-hike" component={AddHike} />
+            <PrivateRoute exact path="/add-course" component={AddCourse} />
+            <PrivateRoute exact path="/posts" component={Posts} />
+            <PrivateRoute exact path="/make-post" component={PostForm} />
+            <PrivateRoute exact path="/posts/:id" component={Post} />
+            <Route exact path="/trails-map" component={MapSearch} />
+            <Route component={UnknownRoute} />
           </Switch>
-        </Fragment>
+          <Alert />
+        </div>
+
       </Router>
-    </Provider>
+
+    </Provider >
+
+
   )
 }
 export default App;

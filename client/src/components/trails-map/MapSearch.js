@@ -6,18 +6,19 @@ import ResultsOverview from "./ResultsOverview"
 import ResultsList from "./ResultsList"
 import FilterMenu from "./FilterMenu"
 import SavedTrailsBtn from "./SavedTrailsBtn"
+import DisplayLargePicture from "./DisplayLargePicture"
 import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
 
 const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
 
-    useEffect(() => { getCurrentProfile()},[getCurrentProfile]);
-    const [filterValues, setFilter] = useState(initialFilterValues);
+    useEffect(() => { if (isAuthenticated) getCurrentProfile() }, [getCurrentProfile, isAuthenticated]);
 
+    const [filterValues, setFilter] = useState(initialFilterValues);
     const [mapCoordonates, setMapCoordonates] = useState({
         latitude: 48,
         longitude: -119,
-        displayCircle: false
+        displayCircle: hikingProject.length ? true : false
     })
 
     const filterTrails = useCallback((trails, filterValues) => {
@@ -44,6 +45,11 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
         await setViewSavedTrails(!viewSavedTrails)
     }
 
+    const [viewPicture, setViewPicture] = useState(false);
+    const togglePicture = (pictureUrl) => {
+        setViewPicture(pictureUrl)
+    }
+
     const mapClicked = (e) => {
         setMapCoordonates({ latitude: e.latLng.lat(), longitude: e.latLng.lng(), displayCircle: true })
         getHikingProjectTrails(e.latLng.lat(), e.latLng.lng())
@@ -51,9 +57,9 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     return (
         <div className="mapContainer2">
-
-            {isAuthenticated && 
-            <SavedTrailsBtn viewSavedTrails = {viewSavedTrails} toggleSaved = {toggleSaved} /> }
+            {viewPicture && <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
+            {isAuthenticated &&
+                <SavedTrailsBtn viewSavedTrails={viewSavedTrails} toggleSaved={toggleSaved} />}
             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
 
             <div className="resultsContainer">
@@ -64,11 +70,12 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                     viewSavedTrails={viewSavedTrails}
                     userProfile={userProfile}
                 />
-                <ResultsList 
-                viewSavedTrails={viewSavedTrails}
-                userProfile={userProfile} 
-                trails={filteredTrails} 
-                isAuthenticated={isAuthenticated} 
+                <ResultsList
+                    togglePicture={togglePicture}
+                    viewSavedTrails={viewSavedTrails}
+                    userProfile={userProfile}
+                    trails={filteredTrails}
+                    isAuthenticated={isAuthenticated}
                 />
             </div>
             <ResultsOverview filteredTrails={filteredTrails} hikingProject={hikingProject} />

@@ -57,7 +57,7 @@ const Createprofile = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getCurrentProfile]);
     return !loading && profile === null ? (
-        <Fragment>
+        <div className="res-width">
             <h1 className='large text-primary'>Create Your Profile</h1>
             <p className='lead'>
                 <i className='fas fa-user' />
@@ -130,24 +130,24 @@ const Createprofile = ({
                     </button>
                     <span>Optional</span>
                 </div>
-                    {displaySocialInputs && (
-                        <Fragment>
-                            <div className='form-group social-input'>
-                                <i className='fab fa-twitter fa-2x' />
-                                <span className='form-text'>{twitterURL}</span>
-                                <input
-                                    type='text'
-                                    name='twitter'
-                                    value={twitter}
-                                    onChange={e => onChange(e)}
-                                />
-                            </div>
-                            <div className='form-group social-input'>
-                                <i className='fab fa-facebook fa-2x' />
-                                <span className='form-text'>{facebookURL}</span>
-                                <input
-                                    type='text'
-                                    name='facebook'
+                {displaySocialInputs && (
+                    <Fragment>
+                        <div className='form-group social-input'>
+                            <i className='fab fa-twitter fa-2x' />
+                            <span className='form-text'>{twitterURL}</span>
+                            <input
+                                type='text'
+                                name='twitter'
+                                value={twitter}
+                                onChange={e => onChange(e)}
+                            />
+                        </div>
+                        <div className='form-group social-input'>
+                            <i className='fab fa-facebook fa-2x' />
+                            <span className='form-text'>{facebookURL}</span>
+                            <input
+                                type='text'
+                                name='facebook'
                                 value={facebook}
                                 onChange={e => onChange(e)}
                             />
@@ -200,7 +200,7 @@ const Createprofile = ({
                 <input type='submit' className='btn btn-primary my-1' />
                 <Link className='btn btn-light my-1' to='/dashboard'>Go Back </Link>
             </form>
-        </Fragment>) : (<Redirect to='/dashboard' />);
+        </div>) : (<Redirect to='/dashboard' />);
 };
 
 Createprofile.propTypes = {

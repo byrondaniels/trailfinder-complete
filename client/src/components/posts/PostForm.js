@@ -7,7 +7,7 @@ const PostForm = ({ addPost }) => {
     const [text, setText] = useState('');
 
     return (
-        <div className='post-form'>
+        <div className='post-form res-width'>
             <div className='bg-primary p'>
                 <h3>Talk about a hike you're thinking about...</h3>
             </div>

@@ -10,7 +10,7 @@ const Landing = ({ isAuthenticated }) => {
     }
 
     return (
-        <div className="landing">
+        <div id="landing">
             <div className="dark-overlay">
                 <div className="landing-inner">
                     <h1 className="x-large">TrailFinder</h1>

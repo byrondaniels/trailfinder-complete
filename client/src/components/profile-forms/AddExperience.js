@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -6,7 +6,7 @@ import { addExperience } from '../../actions/profile'
 
 
 
-const AddExperience = ({addExperience, history}) => {
+const AddExperience = ({ addExperience, history }) => {
 
     const [formData, setFormData] = useState({
         company: '',
@@ -28,7 +28,7 @@ const AddExperience = ({addExperience, history}) => {
 
 
     return (
-        <Fragment>
+        <div className="res-width">
             <h1 className="large text-primary">
                 Add An Experience
       </h1>
@@ -37,35 +37,35 @@ const AddExperience = ({addExperience, history}) => {
                 positions that you have had in the past
       </p>
             <small>* = required field</small>
-            <form className="form" onSubmit ={e=>{
+            <form className="form" onSubmit={e => {
                 e.preventDefault();
-                addExperience(formData,history)
+                addExperience(formData, history)
             }}>
                 <div className="form-group">
-                    <input type="text" value= {title} onChange = {e=>onChange(e)} placeholder="* Job Title" name="title" required />
+                    <input type="text" value={title} onChange={e => onChange(e)} placeholder="* Job Title" name="title" required />
                 </div>
                 <div className="form-group">
-                    <input type="text" value= {company} onChange = {e=>onChange(e)} placeholder="* Company" name="company" required />
+                    <input type="text" value={company} onChange={e => onChange(e)} placeholder="* Company" name="company" required />
                 </div>
                 <div className="form-group">
-                    <input type="text" value= {location} onChange = {e=>onChange(e)} placeholder="Location" name="location" />
+                    <input type="text" value={location} onChange={e => onChange(e)} placeholder="Location" name="location" />
                 </div>
                 <div className="form-group">
                     <h4>From Date</h4>
-                    <input type="date" value= {from} onChange = {e=>onChange(e)}  name="from" />
+                    <input type="date" value={from} onChange={e => onChange(e)} name="from" />
                 </div>
                 <div className="form-group">
-                    <p><input type="checkbox" name="current" checked = {current} value= {current} 
-                    onChange = {e=>{
-                        setFormData({...formData,current: !current})
-                        toggleDisabled(!toDateDisabled)
-                        }}  
+                    <p><input type="checkbox" name="current" checked={current} value={current}
+                        onChange={e => {
+                            setFormData({ ...formData, current: !current })
+                            toggleDisabled(!toDateDisabled)
+                        }}
                     />{' '} Current Job</p>
                 </div>
                 <div className="form-group">
                     <h4>To Date</h4>
-                    <input type="date" value= {to} onChange = {e=>onChange(e)}  name="to" 
-                    disabled = {toDateDisabled? 'disabled':''} />
+                    <input type="date" value={to} onChange={e => onChange(e)} name="to"
+                        disabled={toDateDisabled ? 'disabled' : ''} />
                 </div>
                 <div className="form-group">
                     <textarea
@@ -73,15 +73,15 @@ const AddExperience = ({addExperience, history}) => {
                         cols="30"
                         rows="5"
                         placeholder="Job Description"
-                        value= {description} 
-                        onChange = {e=>onChange(e)}
+                        value={description}
+                        onChange={e => onChange(e)}
                     ></textarea>
                 </div>
                 <input type="submit" className="btn btn-primary my-1" />
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
             </form>
 
-        </Fragment>
+        </div>
     )
 };
 

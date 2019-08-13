@@ -15,7 +15,7 @@ import {
 const MapRender = compose(
     withProps({
         googleMapURL:
-            `https://maps.googleapis.com/maps/api/js?key=${googleMapKey}&v=3.38&libraries=geometry,drawing,places`,
+            `https://maps.googleapis.com/maps/api/js?key=${googleMapKey}&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ width: '100%', margin: '0' }} />,
         mapElement: <div style={{ height: `100%` }} />
@@ -67,12 +67,12 @@ const MapRender = compose(
                             />
                         );
                     })}
-                {viewSavedTrails && userProfile &&userProfile.hikingprojecttrails2 &&
+                {viewSavedTrails && userProfile && userProfile.hikingprojecttrails2 &&
                     userProfile.hikingprojecttrails2.map((stringTrail, i) => {
                         const trail = JSON.parse(stringTrail.hikeData);
                         return (
                             <Marker
-                                key={i}
+                                key={i + 100}
                                 title={trail.name}
                                 position={{
                                     lat: trail.latitude,

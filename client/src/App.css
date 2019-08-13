@@ -35,7 +35,7 @@ img {
 }
 
 /* Utilities */
-.container {
+.res-width {
   max-width: 1100px;
   margin: auto;
   overflow: hidden;
@@ -51,14 +51,12 @@ img {
 }
 
 .mapContainer2{
-  position: absolute;
-  top: 70px;
-  left: 0;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 70px);
   overflow-x: hidden;
+  margin-top: 70px;
+  position: relative;
 }
 /* Text Styles*/
 .x-large {
@@ -371,7 +369,8 @@ button {
 }
 
 /* Landing Page */
-.landing {
+#landing {
+  max-width: initial;
   position: relative;
   background: url('./img/dolmites.jpg') no-repeat center center/cover;
   height: 100vh;
@@ -406,7 +405,8 @@ button {
   grid-template-areas:
     'top top'
     'about about'
-    'exp cor';
+    'exp cor'
+    ;
   grid-gap: 1rem;
 }
 
@@ -473,6 +473,32 @@ button {
 .profile-cor p {
   margin: 0.5rem 0;
 }
+.stars{
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family: 'Raleway', sans-serif;
+margin: auto;
+margin-right: 2px;
+width: 150px;
+}
+
+.profile-hiking-project {
+  grid-area: indiv-hike;
+}
+
+.profile-hiking-project .indiv-hike {
+  display: flex;
+}
+
+.profile-hiking-project .indiv-hike > div::nth-child(2) {
+  max-width: 500px;
+}
+
+.profile-hiking-project > div:last-child {
+  flex: 3;
+  flex-basis: 20%;
+}
 
 
 /* Posts Page */
@@ -516,6 +542,15 @@ button {
   background-position: center center;
   object-fit: cover;
   background-size: cover;
+}
+#profile-hike-img{
+  min-height: 150px;
+  min-width: 150px;
+  background-position: center center;
+  object-fit: cover;
+  background-size: cover;
+  /* border: solid black 2px; */
+  margin-right: 10px;
 }
 
 .profile-img{
@@ -562,8 +597,9 @@ button {
 }
 
 .map2{
-  left: 355px;
+  left: 255px;
   border: solid 1px;
+  z-index: 2;
 }
 .map3{
   left: 255px;
@@ -754,13 +790,53 @@ position: absolute;
   background: white;
 }
 .bg-grey{
-  background: grey;
+  background: rgb(192, 192, 192);
+}
+
+.mas-10{
+  padding: 0px 10px;
+  margin: 0px 10px;
+}
+
+.large-picture{
+  z-index: 666;
+  width: 60vmin;
+  height: 60vmin;
+  background-position: center;
+  background-size: cover;
+}
+
+.large-picture-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 70px);
+  position: absolute;
+}
+
+.exit-btn{
+  border-radius: 100px;
+  position: relative;
+  top: -10px;
+  left: -10px;
+  text-align: center;
+  background: white;
+  width: 30px;
+  height: 30px;
+  font-size: 120%;
+}
+.exit-btn:hover{
+background: #ccc;
+cursor: pointer;
 }
 
 
-
 /* Mobile Styles */
+
 @media (max-width: 800px) {
+
+
   .container {
     margin-top: 8rem;
   }
@@ -790,10 +866,7 @@ position: absolute;
   
     
   }
-  .mas-10{
-    padding: 0px 10px;
-    margin: 0px 10px;
-  }
+
 
   .navbar ul {
     text-align: center;

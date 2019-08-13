@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -32,7 +32,7 @@ const AddHike = ({ addHike, history }) => {
 
 
     return (
-        <Fragment>
+        <div className="res-width">
             <h1 className="large text-primary"> Add A Hike </h1>
             <p className="lead">
                 <i className="fas fa-mountain"></i>
@@ -81,7 +81,7 @@ const AddHike = ({ addHike, history }) => {
                 <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
             </form>
 
-        </Fragment>
+        </div>
     )
 };
 
