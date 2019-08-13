@@ -25,6 +25,11 @@ const EditProfile = ({
     });
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
     const [displayImageEntry, toggleImageEntry] = useState(false);
+    const twitterURL = "https://www.twitter.com/";
+    const facebookURL = "https://www.facebook.com/";
+    const linkedinURL = "https://www.linkedin.com/";
+    const youtubeURL = "https://www.youtube.com/";
+    const instagramURL = "https://www.instagram.com/";
     const {
         blog,
         location,
@@ -140,37 +145,35 @@ const EditProfile = ({
                         type='button'
                         className='btn btn-light'
                     >
-                        Add Social Network Links
+                        Change Social Network Links
                     </button>
-                    <span>Optional</span>
                 </div>
-                {displaySocialInputs && (
-                    <Fragment>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-twitter fa-2x' />
-                            <input
-                                type='text'
-                                placeholder='Twitter URL'
-                                name='twitter'
-                                value={twitter}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-facebook fa-2x' />
-                            <input
-                                type='text'
-                                placeholder='Facebook URL'
-                                name='facebook'
+                        <Fragment>
+                            <div className='form-group social-input'>
+                                <i className='fab fa-twitter fa-2x' />
+                                <span className='form-text'>{twitterURL}</span>
+                                <input
+                                    type='text'
+                                    name='twitter'
+                                    value={twitter}
+                                    onChange={e => onChange(e)}
+                                />
+                            </div>
+                            <div className='form-group social-input'>
+                                <i className='fab fa-facebook fa-2x' />
+                                <span className='form-text'>{facebookURL}</span>
+                                <input
+                                    type='text'
+                                    name='facebook'
                                 value={facebook}
                                 onChange={e => onChange(e)}
                             />
                         </div>
                         <div className='form-group social-input'>
                             <i className='fab fa-youtube fa-2x' />
+                            <span className='form-text'>{youtubeURL}</span>
                             <input
                                 type='text'
-                                placeholder='YouTube URL'
                                 name='youtube'
                                 value={youtube}
                                 onChange={e => onChange(e)}
@@ -178,9 +181,9 @@ const EditProfile = ({
                         </div>
                         <div className='form-group social-input'>
                             <i className='fab fa-linkedin fa-2x' />
+                            <span className='form-text'>{linkedinURL}</span>
                             <input
                                 type='text'
-                                placeholder='Linkedin URL'
                                 name='linkedin'
                                 value={linkedin}
                                 onChange={e => onChange(e)}
@@ -188,16 +191,15 @@ const EditProfile = ({
                         </div>
                         <div className='form-group social-input'>
                             <i className='fab fa-instagram fa-2x' />
+                            <span className='form-text'>{instagramURL}</span>
                             <input
                                 type='text'
-                                placeholder='Instagram URL'
                                 name='instagram'
                                 value={instagram}
                                 onChange={e => onChange(e)}
                             />
                         </div>
                     </Fragment>
-                )}
                 <small className='form-text'>{externalImg && "An image is set for your profile"}</small>
                 <div className='my-2'>
                     <button

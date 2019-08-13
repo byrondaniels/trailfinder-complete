@@ -130,24 +130,24 @@ const Createprofile = ({
                     </button>
                     <span>Optional</span>
                 </div>
-                {displaySocialInputs && (
-                    <Fragment>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-twitter fa-2x' />
-                            <span className='form-text'>{twitterURL}</span>
-                            <input
-                                type='text'
-                                name='twitter'
-                                value={twitter}
-                                onChange={e => onChange(e)}
-                            />
-                        </div>
-                        <div className='form-group social-input'>
-                            <i className='fab fa-facebook fa-2x' />
-                            <span className='form-text'>{facebookURL}</span>
-                            <input
-                                type='text'
-                                name='facebook'
+                    {displaySocialInputs && (
+                        <Fragment>
+                            <div className='form-group social-input'>
+                                <i className='fab fa-twitter fa-2x' />
+                                <span className='form-text'>{twitterURL}</span>
+                                <input
+                                    type='text'
+                                    name='twitter'
+                                    value={twitter}
+                                    onChange={e => onChange(e)}
+                                />
+                            </div>
+                            <div className='form-group social-input'>
+                                <i className='fab fa-facebook fa-2x' />
+                                <span className='form-text'>{facebookURL}</span>
+                                <input
+                                    type='text'
+                                    name='facebook'
                                 value={facebook}
                                 onChange={e => onChange(e)}
                             />
