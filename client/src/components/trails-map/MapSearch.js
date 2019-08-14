@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import MapRender from "./MapRender"
 import ResultsOverview from "./ResultsOverview"
 import ResultsList from "./ResultsList"
@@ -9,6 +10,7 @@ import SavedTrailsBtn from "./SavedTrailsBtn"
 import DisplayLargePicture from "./DisplayLargePicture"
 import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
+
 
 const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
 
@@ -23,17 +25,18 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     const filterTrails = useCallback((trails, filterValues) => {
         return trails.filter(trail =>
-            filterValues.some(f => f.checked &&
-                (f.max >= trail.length) &&
-                (trail.length > f.min)
+            filterValues.some(
+                f => f.checked && (f.max >= trail.length) && (trail.length > f.min)
             ))
     }, [])
 
-    const filteredTrails = useMemo(() => (filterTrails(hikingProject, filterValues)), [hikingProject, filterValues, filterTrails])
+    const filteredTrails = useMemo(() =>
+        filterTrails(hikingProject, filterValues), [hikingProject, filterValues, filterTrails])
+
     const handleChangeCheckbox = id => {
         setFilter(
             filterValues.map(item => {
-                if (item.id === id) { return { ...item, checked: !item.checked }; }
+                if (item.id === id) return { ...item, checked: !item.checked }
                 else { return item; }
             })
         );
@@ -46,9 +49,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
     }
 
     const [viewPicture, setViewPicture] = useState(false);
-    const togglePicture = (pictureUrl) => {
-        setViewPicture(pictureUrl)
-    }
+    const togglePicture = (pictureUrl) => { setViewPicture(pictureUrl) }
 
     const mapClicked = (e) => {
         setMapCoordonates({ latitude: e.latLng.lat(), longitude: e.latLng.lng(), displayCircle: true })
@@ -57,9 +58,13 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     return (
         <div className="mapContainer2">
-            {viewPicture && <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
+
+            {viewPicture &&
+                <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
+
             {isAuthenticated &&
                 <SavedTrailsBtn viewSavedTrails={viewSavedTrails} toggleSaved={toggleSaved} />}
+
             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
 
             <div className="resultsContainer">
@@ -78,16 +83,19 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                     isAuthenticated={isAuthenticated}
                 />
             </div>
+
             <ResultsOverview filteredTrails={filteredTrails} hikingProject={hikingProject} />
+
         </div>
     )
 };
 
-
 MapSearch.propTypes = {
     hikingProject: PropTypes.array.isRequired,
     getHikingProjectTrails: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    userProfile: PropTypes.object,
+    getCurrentProfile: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

@@ -1,15 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { compose, withProps } from "recompose";
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, Circle } from "react-google-maps";
+
 import { setMapIconColor } from "../../utils/setMapIconColor";
 import { googleMapKey } from "../../config"
-
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    Circle
-} from "react-google-maps";
 
 
 const MapRender = compose(
@@ -24,19 +18,25 @@ const MapRender = compose(
     withGoogleMap
 )(props => {
 
-    const { mapClicked, trails, viewSavedTrails, mapCoordonates: { latitude, longitude, displayCircle }, userProfile } = props
+    const {
+        mapClicked,
+        trails,
+        viewSavedTrails,
+        mapCoordonates: { latitude, longitude, displayCircle },
+        userProfile
+    } = props
 
     return (
-        <Fragment>
-            <GoogleMap onClick={(t) => mapClicked(t)}
-                defaultZoom={6} defaultCenter={{
-                    lat: latitude,
-                    lng: longitude
-                }}>
-
-                {displayCircle && <Circle
+        <GoogleMap
+            onClick={(t) => mapClicked(t)}
+            defaultZoom={6}
+            defaultCenter={{ lat: latitude, lng: longitude }}
+        >
+            {/* The below is for rendering the big grey circle on map */}
+            {displayCircle &&
+                <Circle
                     clickable
-                    onClick={(t) => props.mapClicked(t)}
+                    onClick={(e) => props.mapClicked(e)}
                     center={{
                         lat: latitude,
                         lng: longitude
@@ -49,44 +49,48 @@ const MapRender = compose(
                     }}
                 />}
 
-                {trails &&
-                    trails.map((trail, i) => {
-                        return (
-                            <Marker
-                                key={i}
-                                title={trail.name}
-                                position={{
-                                    lat: trail.latitude,
-                                    lng: trail.longitude
-                                }}
-                                icon={setMapIconColor(trail.length)}
-                                onClick={() => {
-                                    window.open(trail.url, '_blank')
-                                    // props.selectTrail(trail);
-                                }}
-                            />
-                        );
-                    })}
-                {viewSavedTrails && userProfile && userProfile.hikingprojecttrails2 &&
-                    userProfile.hikingprojecttrails2.map((stringTrail, i) => {
-                        const trail = JSON.parse(stringTrail.hikeData);
-                        return (
-                            <Marker
-                                key={i + 100}
-                                title={trail.name}
-                                position={{
-                                    lat: trail.latitude,
-                                    lng: trail.longitude
-                                }}
-                                onClick={() => {
-                                    window.open(trail.url, '_blank')
-                                    // props.selectTrail(trail);
-                                }}
-                            />
-                        );
-                    })}
-            </GoogleMap>
-        </Fragment>
+            {/* The below is for mapping out trails found from API 
+                (sourced from coordonates from map click) ... onto the map */}
+            {trails &&
+                trails.map((trail, i) => {
+                    return (
+                        <Marker
+                            key={i}
+                            title={trail.name}
+                            position={{
+                                lat: trail.latitude,
+                                lng: trail.longitude
+                            }}
+                            // Below is a function to set map icon color based on trail length
+                            icon={setMapIconColor(trail.length)}
+                            onClick={() => { window.open(trail.url, '_blank') }}
+                        />
+                    );
+                })}
+
+            {/* The below is for mapping out trails previously saved by user to the database
+                 ... onto the map.
+                 These will only be shown if toggle button has been clicked and they exist */}
+            {
+                viewSavedTrails &&
+                userProfile &&
+                userProfile.hikingprojecttrails2 &&
+                userProfile.hikingprojecttrails2.map((stringTrail, i) => {
+                    // Trail data has been saved to db as a string so we need to convert it
+                    const trail = JSON.parse(stringTrail.hikeData);
+                    return (
+                        <Marker
+                            key={i + 100}
+                            title={trail.name}
+                            position={{
+                                lat: trail.latitude,
+                                lng: trail.longitude
+                            }}
+                            onClick={() => { window.open(trail.url, '_blank') }}
+                        />
+                    );
+                })}
+        </GoogleMap>
     )
 });
 

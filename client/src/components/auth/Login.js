@@ -6,27 +6,18 @@ import { login } from '../../actions/auth'
 
 
 const Login = ({ login, isAuthenticated }) => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    })
 
+    const [formData, setFormData] = useState({ email: '', password: '' })
     const { email, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-    const onSubmit = e => {
-        e.preventDefault();
-        login(email, password)
-    }
+    const onSubmit = e => { e.preventDefault(); login(email, password) }
 
     // Redirect if logged in 
-    if (isAuthenticated) {
-        return <Redirect to="/dashboard" />
-    }
-
+    if (isAuthenticated) { return <Redirect to="/dashboard" /> }
 
     return (
-        < div className="res-width"  >
+        <div className="res-width">
             <h1 className="large text-primary">Sign In</h1>
             <p className="lead"><i className="fas fa-user"></i> Sign In To Your Account</p>
             <form className="form" onSubmit={e => onSubmit(e)}>

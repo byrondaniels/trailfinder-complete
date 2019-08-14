@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
+
 const ProfileTop = ({ profile: { externalImg, status, location, blog, social, user: { name, avatar } } }) => {
+
     return (
         <div className="profile-top bg-primary p-2">
-            <div className='round-img profile-img' style={{
-                backgroundImage: `url(${avatar ? avatar : externalImg})`
-            }} />
+
+            <div className='round-img profile-img'
+                style={{
+                    backgroundImage: `url(${avatar ? avatar : externalImg})`
+                }} />
+
             <h1 className="large">{name} from {location}</h1>
             <p className="lead">{status}</p>
             <p>{location && <span>{location}</span>}</p>
+
             <div className="icons my-1">
                 {``}
                 {
@@ -21,13 +27,18 @@ const ProfileTop = ({ profile: { externalImg, status, location, blog, social, us
                 }
                 {
                     social &&
-                    Object.keys(social).map((value, i) => {
-                        return <a key={i} href={`https://www.${value}.com/${social[value]}`} target='_blank' rel='noopener noreferrer'>
+                    Object.keys(social).map((value, index) => {
+                        return <a
+                            key={index}
+                            href={`https://www.${value}.com/${social[value]}`}
+                            target='_blank'
+                            rel='noopener noreferrer'>
                             <i className={`fab fa-${value} fa-2x`} />
                         </a>
                     })
                 }
             </div>
+
         </div>
     )
 };

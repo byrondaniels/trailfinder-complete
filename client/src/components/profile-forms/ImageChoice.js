@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner'
@@ -10,12 +10,10 @@ const selectionChoices = ["Dog", "Cat", "Leaf", "Sun", "Ocean", "Cheese", "Robot
 
 const ImageChoice = ({ images, getRandomUnsplashImages, onChangeImg, externalImg }) => {
 
-    useEffect(() => {
-        getRandomUnsplashImages(selectionChoices[0]);
-    }, [getRandomUnsplashImages]);
+    useEffect(() => { getRandomUnsplashImages(selectionChoices[0]) }, [getRandomUnsplashImages]);
 
     return (
-        <Fragment>
+        <>
             <div className="word-container" >
                 <div className="indiv-word">Choose an image type</div>
                 {selectionChoices.map((word, index) => {
@@ -35,7 +33,7 @@ const ImageChoice = ({ images, getRandomUnsplashImages, onChangeImg, externalImg
                         </div>)
                 }) : <Spinner />}
             </div>
-        </Fragment>
+        </>
     )
 };
 

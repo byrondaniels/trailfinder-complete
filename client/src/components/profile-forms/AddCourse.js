@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { addCourse } from '../../actions/profile'
 
+import { addCourse } from '../../actions/profile'
 
 
 const AddCourse = ({ addCourse, history }) => {
@@ -20,23 +20,43 @@ const AddCourse = ({ addCourse, history }) => {
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
-
     return (
         <div className="res-width">
+
             <h1 className="large text-primary">Add Completed Courses</h1>
+
             <p className="lead">
-                <i className="fas fa-map"></i> Add in any hiking, survival or mountaneering courses you have completed
-      </p>
+                <i className="fas fa-map" />
+                Add in any hiking, survival or mountaneering courses you have completed
+            </p>
             <small>* = required field</small>
-            <form className="form" onSubmit={e => {
-                e.preventDefault();
-                addCourse(formData, history)
-            }}>
+
+            <form
+                className="form"
+                onSubmit={e => {
+                    e.preventDefault();
+                    addCourse(formData, history)
+                }}>
                 <div className="form-group">
-                    <input type="text" value={authority} onChange={e => onChange(e)} placeholder="* Issuing Authority" name="authority" required />
+                    <input
+                        type="text"
+                        value={authority}
+                        onChange={e => onChange(e)}
+                        placeholder="* Issuing Authority"
+                        name="authority"
+                        required
+                    />
                 </div>
+
                 <div className="form-group">
-                    <input type="text" value={name} onChange={e => onChange(e)} placeholder="* Course Name" name="name" required />
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={e => onChange(e)}
+                        placeholder="* Course Name"
+                        name="name"
+                        required
+                    />
                 </div>
 
                 <div className="form-group">
@@ -50,10 +70,17 @@ const AddCourse = ({ addCourse, history }) => {
                         <option value='Other'>Other</option>
                     </select>
                 </div>
+
                 <div className="form-group">
                     <h4>Completed Date</h4>
-                    <input type="date" value={completedDate} onChange={e => onChange(e)} name="completedDate" />
+                    <input
+                        type="date"
+                        value={completedDate}
+                        onChange={e => onChange(e)}
+                        name="completedDate"
+                    />
                 </div>
+
                 <div className="form-group">
                     <textarea
                         name="description"
@@ -62,10 +89,18 @@ const AddCourse = ({ addCourse, history }) => {
                         placeholder="Program Description"
                         value={description}
                         onChange={e => onChange(e)}
-                    ></textarea>
+                    />
                 </div>
-                <input type="submit" className="btn btn-primary my-1" />
-                <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+
+                <input
+                    type="submit"
+                    className="btn btn-primary my-1"
+                />
+                <Link
+                    className="btn btn-light my-1"
+                    to="/dashboard">
+                    Go Back
+                </Link>
             </form>
 
         </div>
@@ -73,9 +108,8 @@ const AddCourse = ({ addCourse, history }) => {
 };
 
 AddCourse.propTypes = {
-    addCourse: PropTypes.func.isRequired
+    addCourse: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
-
-
 
 export default connect(null, { addCourse })(withRouter(AddCourse));

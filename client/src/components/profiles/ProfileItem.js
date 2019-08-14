@@ -3,20 +3,26 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 
-
 const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, location, skills, externalImg, hikingprojecttrails2 } }) => {
+
     return (
+
         <div className='profile bg-light'>
-            <div className='round-img profile-img-2' style={{
-                backgroundImage: `url(${externalImg ? externalImg : avatar})`
-            }} />
+            <div
+                className='round-img profile-img-2'
+                style={{ backgroundImage: `url(${externalImg ? externalImg : avatar})` }}
+            />
             <div>
                 <h2>{name}</h2>
                 <p>{status}</p>
                 {hikingprojecttrails2 && <span>{hikingprojecttrails2.length} trails</span>}
                 <p className="my-1">{location && <span>{location}</span>}</p>
 
-                <Link to={`/profile/${_id}`} className='btn btn-primary'>View Profile</Link>
+                <Link
+                    to={`/profile/${_id}`}
+                    className='btn btn-primary'>
+                    View Profile
+                </Link>
 
             </div>
             <ul>
@@ -25,8 +31,6 @@ const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, location,
                         <i className='fas fa-check' /> {skill}
                     </li>
                 ))}
-
-
             </ul>
         </div>
     )
@@ -34,8 +38,6 @@ const ProfileItem = ({ profile: { user: { _id, name, avatar }, status, location,
 
 ProfileItem.propTypes = {
     profile: PropTypes.object.isRequired
-
 }
-
 
 export default ProfileItem;

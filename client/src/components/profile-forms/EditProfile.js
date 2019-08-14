@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -52,6 +52,7 @@ const EditProfile = ({
         createProfile(formData, history, true);
     };
     useEffect(() => {
+        console.log('called use effect')
         getCurrentProfile();
 
         setFormData({
@@ -67,10 +68,7 @@ const EditProfile = ({
             youtube: loading || !profile.social ? "" : profile.social.youtube,
             instagram: loading || !profile.social ? "" : profile.social.instagram,
         })
-
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [getCurrentProfile]);
+    }, [getCurrentProfile, profile.blog, profile.location, profile.status, profile.skills, profile.bio, profile.externalImg, profile.social, profile.social.twitter, profile.social.facebook, profile.social.linkedin, profile.social.youtube, profile.social.instagram, loading]);
     return !loading && profile !== null ? (
         <div className="res-width">
             <h1 className='large text-primary'>Edit Your Profile</h1>
@@ -148,7 +146,7 @@ const EditProfile = ({
                         Change Social Network Links
                     </button>
                 </div>
-                <Fragment>
+                <>
                     <div className='form-group social-input'>
                         <i className='fab fa-twitter fa-2x' />
                         <span className='form-text'>{twitterURL}</span>
@@ -199,7 +197,7 @@ const EditProfile = ({
                             onChange={e => onChange(e)}
                         />
                     </div>
-                </Fragment>
+                </>
                 <small className='form-text'>{externalImg && "An image is set for your profile"}</small>
                 <div className='my-2'>
                     <button
@@ -214,9 +212,9 @@ const EditProfile = ({
 
 
                 {displayImageEntry && (
-                    <Fragment>
+                    <>
                         <ImageChoice onChangeImg={onChangeImg} externalImg={externalImg} />
-                    </Fragment>
+                    </>
                 )}
                 <input type='submit' className='btn btn-primary my-1' />
                 <Link className='btn btn-light my-1' to='/dashboard'>

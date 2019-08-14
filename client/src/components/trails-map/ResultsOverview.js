@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const averageValues = (array, parameter) => {
-    const totalLength = array.reduce((a, b) => { return a + b[parameter]; }, 0);
-    return Math.round(totalLength / array.length)
-}
+import { calcAvgValues } from "../../utils/calcAvgValues"
 
 
 const ResultsOverview = ({ filteredTrails, hikingProject }) => {
 
-    const averageLength = averageValues(hikingProject, "length")
-    const averageLengthFiltered = averageValues(filteredTrails, "length")
-    const averageAscent = Math.round(averageValues(hikingProject, "ascent") * 0.3)
-    const averageAscentFiltered = Math.round(averageValues(filteredTrails, "ascent") * 0.3)
+    const averageLength = calcAvgValues(hikingProject, "length")
+    const averageLengthFiltered = calcAvgValues(filteredTrails, "length")
+    const averageAscent = Math.round(calcAvgValues(hikingProject, "ascent") * 0.3)
+    const averageAscentFiltered = Math.round(calcAvgValues(filteredTrails, "ascent") * 0.3)
 
     return (
         <div className="resultsOverview">
@@ -38,3 +35,4 @@ ResultsOverview.propTypes = {
 }
 
 export default ResultsOverview;
+

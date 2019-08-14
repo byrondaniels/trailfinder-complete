@@ -1,15 +1,16 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileHikes from './ProfileHikes';
 import ProfileCourses from './ProfileCourses';
-
 import { getProfileById } from '../../actions/profile';
 import ProfileHikingProject from './ProfileHikingProject';
+
 
 const Profile = ({
     getProfileById,
@@ -17,64 +18,67 @@ const Profile = ({
     auth,
     match
 }) => {
-    useEffect(() => {
-        getProfileById(match.params.id);
-    }, [getProfileById, match.params.id]);
+
+    useEffect(() => { getProfileById(match.params.id) }, [getProfileById, match.params.id]);
 
     return (
         <div className="res-width">
-            {profile === null || loading ? (
+            {profile === null || loading ?
                 <Spinner />
-            ) : (
-                    <Fragment>
-                        <Link to='/profiles' className='btn btn-light'>
-                            Back To Profiles
+                : <>
+
+                    <Link to='/profiles' className='btn btn-light'>
+                        Back To Profiles
+                    </Link>
+
+                    {auth.isAuthenticated &&
+                        auth.loading === false &&
+                        auth.user._id === profile.user._id &&
+                        <Link to='/edit-profile' className='btn btn-dark'>
+                            Edit Profile
                         </Link>
-                        {auth.isAuthenticated &&
-                            auth.loading === false &&
-                            auth.user._id === profile.user._id && (
-                                <Link to='/edit-profile' className='btn btn-dark'>
-                                    Edit Profile
-                                </Link>
-                            )}
-                        <div className='profile-grid my-1'>
-                            <ProfileTop profile={profile} />
-                            <ProfileAbout profile={profile} />
-                            <div className='profile-exp bg-white p-2'>
-                                <h2 className='text-primary'>Hikes</h2>
-                                {profile.hikes.length > 0 ? (
-                                    <Fragment>
-                                        {profile.hikes.map(hikes => (
-                                            <ProfileHikes
-                                                key={hikes._id}
-                                                hikes={hikes}
-                                            />
-                                        ))}
-                                    </Fragment>
-                                ) : (<h4>No hikes completed</h4>)}
-                            </div>
+                    }
+                    <div className='profile-grid my-1'>
 
-                            <div className='profile-cor bg-white p-2'>
-                                <h2 className='text-primary'>Courses</h2>
-                                {profile.courses.length > 0 ? (
-                                    <Fragment>
-                                        {profile.courses.map(course => (
-                                            <ProfileCourses
-                                                key={course._id}
-                                                course={course}
-                                            />
-                                        ))}
-                                    </Fragment>
-                                ) : (<h4>No courses found</h4>)
-                                }
-                            </div>
+                        <ProfileTop profile={profile} />
+                        <ProfileAbout profile={profile} />
 
+                        <div className='profile-exp bg-white p-2'>
+                            <h2 className='text-primary'>Hikes</h2>
+                            {profile.hikes.length > 0 ?
+                                <>
+                                    {profile.hikes.map((hikes, index) => (
+                                        <ProfileHikes
+                                            key={index}
+                                            hikes={hikes}
+                                        />
+                                    ))}
+                                </>
+                                : <h4>No hikes completed</h4>}
                         </div>
-                        {profile.hikingprojecttrails2 && (
-                            <ProfileHikingProject trails={profile.hikingprojecttrails2} />
-                        )}
-                    </Fragment>
-                )}
+
+                        <div className='profile-cor bg-white p-2'>
+                            <h2 className='text-primary'>Courses</h2>
+                            {profile.courses.length > 0 ?
+                                <>
+                                    {profile.courses.map((course, index) => (
+                                        <ProfileCourses
+                                            key={index}
+                                            course={course}
+                                        />
+                                    ))}
+                                </>
+                                : <h4>No courses found</h4>
+                            }
+                        </div>
+
+                    </div>
+
+                    {profile.hikingprojecttrails2 &&
+                        <ProfileHikingProject trails={profile.hikingprojecttrails2} />
+                    }
+                </>
+            }
         </div>
     );
 };
@@ -82,7 +86,8 @@ const Profile = ({
 Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -90,7 +95,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(
-    mapStateToProps,
-    { getProfileById }
-)(Profile);
+export default connect(mapStateToProps, { getProfileById })(Profile);

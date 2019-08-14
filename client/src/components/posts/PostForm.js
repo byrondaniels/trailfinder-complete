@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { addPost } from '../../actions/post';
 
+
 const PostForm = ({ addPost }) => {
+
     const [text, setText] = useState('');
 
     return (
+
         <div className='post-form res-width'>
+
             <div className='bg-primary p'>
                 <h3>Talk about a hike you're thinking about...</h3>
             </div>
+
             <form
                 className='form my-1'
                 onSubmit={e => {
@@ -28,8 +34,12 @@ const PostForm = ({ addPost }) => {
                     onChange={e => setText(e.target.value)}
                     required
                 />
-                <input type='submit' className='btn btn-dark my-1' value='Submit' />
+                <input type='submit'
+                    className='btn btn-dark my-1'
+                    value='Submit'
+                />
             </form>
+
         </div>
     );
 };
@@ -38,7 +48,4 @@ PostForm.propTypes = {
     addPost: PropTypes.func.isRequired
 };
 
-export default connect(
-    null,
-    { addPost }
-)(PostForm);
+export default connect(null, { addPost })(PostForm);

@@ -9,8 +9,8 @@ const FilterMenu = ({ filterValues, handleChangeCheckbox }) => {
             <div className="dropdown-content drop1">
                 <span>Filter by Length: </span>
                 <ul>
-                    {filterValues.map(item => (
-                        <li key={item.id} onClick={() => handleChangeCheckbox(item.id)}>
+                    {filterValues.map((item, index) => (
+                        <li key={index} onClick={() => handleChangeCheckbox(item.id)}>
                             <input
                                 type="checkbox"
                                 checked={item.checked}

@@ -1,12 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
 import { connect } from 'react-redux';
+
 import { deleteCourse } from '../../actions/profile'
 
 
 const Course = ({ courses, deleteCourse }) => {
+
   const coursesList = courses.map(item => (
     <tr key={item._id}>
       <td className="hide-sm">{item.name}</td>
@@ -26,7 +28,7 @@ const Course = ({ courses, deleteCourse }) => {
   ));
 
   return (
-    <Fragment>
+    <>
       <h2 className="my-2">Courses Completed</h2>
       <table className="table">
         <thead>
@@ -39,7 +41,7 @@ const Course = ({ courses, deleteCourse }) => {
         </thead>
         <tbody>{coursesList}</tbody>
       </table>
-    </Fragment>
+    </>
   );
 };
 
@@ -48,7 +50,4 @@ Course.propTypes = {
   deleteCourse: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { deleteCourse }
-)(Course);
+export default connect(null, { deleteCourse })(Course);

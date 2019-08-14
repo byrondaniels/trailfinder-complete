@@ -4,7 +4,6 @@ import {
     UPDATE_PROFILE, GET_HIKING_PROJECT_TRAILS
 } from "../actions/types";
 
-
 const initialState = {
     profile: null,
     profiles: [],
@@ -14,9 +13,10 @@ const initialState = {
     error: {}
 }
 
-export default function (state = initialState, action) {
-    const { type, payload } = action;
 
+export default function (state = initialState, action) {
+
+    const { type, payload } = action;
 
     switch (type) {
         case GET_PROFILE:

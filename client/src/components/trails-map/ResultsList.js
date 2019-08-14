@@ -1,71 +1,75 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import logo from "../../img/mountain.png";
 import ResultsCard from "./ResultsCard"
-import { connect } from 'react-redux'
 import { addAPIHike, deleteAPIHike } from '../../actions/profile'
 
-const ResultsList = ({ trails, addAPIHike, deleteAPIHike, viewSavedTrails, userProfile, togglePicture }) => {
 
-    const deleteTrail = (data) => { deleteAPIHike(data) }
+const ResultsList = ({ trails, addAPIHike, deleteAPIHike, viewSavedTrails, togglePicture, userProfile }) => {
+
+    const deleteTrail = (id) => { deleteAPIHike(id) }
     const saveTrail = (data) => { addAPIHike({ "hikeData": JSON.stringify(data) }) }
-    const displayList = trails.length > 0 || (viewSavedTrails && userProfile && userProfile.hikingprojecttrails2)
+    const displaySavedTrails = viewSavedTrails && userProfile && userProfile.hikingprojecttrails2
+    const displayList = trails.length > 0 || displaySavedTrails
+
+
     return (
-        <Fragment>
-            <div className="trail-list-flex" style={displayList ? { width: "500px", transistionDelay: "0s" } : { width: "0px", transistionDelay: "5s" }}>
-                <div>
-                    {
-                        viewSavedTrails && userProfile && userProfile.hikingprojecttrails2 && (
-                            userProfile.hikingprojecttrails2.map((stringTrail, i) => {
+        <div
+            className="trail-list-flex"
+            style={displayList ?
+                { width: "500px", transistionDelay: "0s" } :
+                { width: "0px", transistionDelay: "5s" }}
+        >
+            <div>
+                {
+                    displaySavedTrails &&
+                    userProfile.hikingprojecttrails2.map((stringTrail, index) => {
 
-                                const savedTrail = JSON.parse(stringTrail.hikeData);
-
-                                return <ResultsCard
-                                    key={i}
-                                    title={savedTrail.name}
-                                    length={savedTrail.length}
-                                    ascent={savedTrail.ascent}
-                                    embed={savedTrail.imgSqSmall ? savedTrail.imgSqSmall : logo}
-                                    data={savedTrail}
-                                    payload={stringTrail._id}
-                                    isAuthenticated={userProfile}
-                                    trailDelete={deleteTrail}
-                                    actionText={"Delete"}
-                                    alreadySaved={stringTrail._id}
-                                    togglePicture={togglePicture}
-                                />
-
-                            }))
-                    }
-                    {trails.length > 0 && (
-                        trails.map((trail, i) => {
-
-                            return (<ResultsCard
-                                key={i}
-                                title={trail.name}
-                                length={trail.length}
-                                ascent={trail.ascent}
-                                embed={trail.imgSqSmall ? trail.imgSqSmall : logo}
-                                data={trail}
-                                payload={trail}
-                                isAuthenticated={userProfile}
-                                trailBtn={saveTrail}
-                                trailDelete={deleteTrail}
-                                actionText={"Save"}
+                        const savedTrail = JSON.parse(stringTrail.hikeData);
+                        return (
+                            <ResultsCard
+                                key={index}
+                                image={savedTrail.imgSqSmall ? savedTrail.imgSqSmall : logo}
+                                trailData={savedTrail}
+                                isLoggedIn={userProfile}
+                                deleteTrail={deleteTrail}
+                                togglePicture={togglePicture}
+                                alreadySaved={stringTrail._id}
+                            />)
+                    })
+                }
+                {
+                    trails.length > 0 && trails.map((trail, index) => {
+                        return (
+                            <ResultsCard
+                                key={index}
+                                image={trail.imgSqSmall ? trail.imgSqSmall : logo}
+                                trailData={trail}
+                                isLoggedIn={userProfile}
+                                deleteTrail={deleteTrail}
                                 togglePicture={togglePicture}
                                 alreadySaved={userProfile && userProfile.hikingprojecttrails2 && userProfile.hikingprojecttrails2
                                     .map(item => (item.hikeData === JSON.stringify(trail)) ? item._id : 0)
                                     .filter(value => value !== 0)}
+                                saveBtnPayload={trail}
+                                saveTrailBtn={saveTrail}
                             />)
-                        })
-                    )}
-                </div>
+                    })
+                }
             </div>
-        </Fragment>
+        </div>
     )
 };
+
 ResultsList.propTypes = {
     trails: PropTypes.array.isRequired,
+    addAPIHike: PropTypes.func.isRequired,
+    deleteAPIHike: PropTypes.func.isRequired,
+    viewSavedTrails: PropTypes.bool.isRequired,
+    togglePicture: PropTypes.func.isRequired,
+    userProfile: PropTypes.object,
 }
-export default connect(null,
-    { addAPIHike, deleteAPIHike })(ResultsList);
+
+export default connect(null, { addAPIHike, deleteAPIHike })(ResultsList);

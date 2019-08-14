@@ -1,39 +1,28 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert'
 import { register } from '../../actions/auth'
 
-import PropTypes from 'prop-types'
-
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
-    })
 
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', password2: '' })
     const { name, email, password, password2 } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
     const onSubmit = async e => {
         e.preventDefault();
-        if (password !== password2) {
-            setAlert("Passwords dont match", 'danger')
-        } else {
-            register({ name, email, password })
-        }
+        if (password !== password2) setAlert("Passwords dont match", 'danger')
+        else register({ name, email, password })
     }
 
     // Redirect if logged in 
-    if (isAuthenticated) {
-        return <Redirect to="/dashboard" />
-    }
+    if (isAuthenticated) { return <Redirect to="/dashboard" /> }
 
     return (
-        < div className="res-width" >
+        <div className="res-width">
             <h1 className="large text-primary">Sign Up</h1>
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
             <form className="form" onSubmit={e => onSubmit(e)}>
@@ -85,7 +74,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 };
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({

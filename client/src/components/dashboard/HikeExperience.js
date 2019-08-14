@@ -1,14 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
+
 import { connect } from 'react-redux';
 import { deleteHike } from '../../actions/profile'
 
 
-const HikeExperience = ({ hikes, deleteHike, identifier }) => {
-  const hikeList = hikes.map(hike => (
-    <tr key={hike._id}>
+const HikeExperience = ({ identifier, hikes, deleteHike }) => {
+
+  const hikeList = hikes.map((hike, index) => (
+
+    <tr key={index}>
       <td>{hike.name}</td>
       <td className="hide-sm">{hike.location}</td>
       <td className="hide-sm">{hike.length}</td>
@@ -29,7 +32,7 @@ const HikeExperience = ({ hikes, deleteHike, identifier }) => {
   ));
 
   return (
-    <Fragment>
+    <>
       <h2 className="my-2">Hikes {identifier}</h2>
       <table className="table">
         <thead>
@@ -43,7 +46,7 @@ const HikeExperience = ({ hikes, deleteHike, identifier }) => {
         </thead>
         <tbody>{hikeList}</tbody>
       </table>
-    </Fragment>
+    </>
   );
 };
 
@@ -53,7 +56,4 @@ HikeExperience.propTypes = {
   deleteHike: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { deleteHike }
-)(HikeExperience);
+export default connect(null, { deleteHike })(HikeExperience);
