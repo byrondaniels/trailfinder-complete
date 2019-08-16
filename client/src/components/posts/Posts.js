@@ -14,7 +14,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
     return loading ? <Spinner /> :
 
-        <div className="res-width">
+        (<div className="res-width">
 
             <h1 className='large text-primary'>Posts</h1>
             <p className='lead'><i className='fas fa-user' />
@@ -29,7 +29,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
                 ))}
             </div>
 
-        </div>
+        </div>)
 };
 
 Posts.propTypes = {

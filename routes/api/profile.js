@@ -1,26 +1,27 @@
 const express = require('express');
-const request = require('request');
 const config = require('config');
+// Do I need these or can I delete them
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+//
 const Unsplash = require('unsplash-js').default;
 const { toJson } = require('unsplash-js');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
+
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Posts');
+
 
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate(
-            'user',
-            ['name', 'avatar']
-        );
+        const profile = await Profile.findOne({ user: req.user.id })
+            .populate('user', ['name', 'avatar'])
 
         if (!profile) {
             return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -36,8 +37,7 @@ router.get('/me', auth, async (req, res) => {
 // @route    POST api/profile
 // @desc     Create or update user profile
 // @access   Private
-router.post(
-    '/',
+router.post('/',
     [auth, [
         check('status', 'Status is required').not().isEmpty(),
         check('skills', 'Skills is required').not().isEmpty()
@@ -99,7 +99,6 @@ router.post(
             }
         }
 
-
         try {
             let profile = await Profile.findOne({ user: req.user.id });
             if (profile) {
@@ -142,9 +141,8 @@ router.get('/', async (req, res) => {
 // @access   Public
 router.get('/user/:user_id', async (req, res) => {
     try {
-        const profile = await Profile.findOne({
-            user: req.params.user_id
-        }).populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.user_id })
+            .populate('user', ['name', 'avatar']);
 
         if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
@@ -226,26 +224,25 @@ router.put('/hikes',
     }
 );
 
-
 // @route    PUT api/profile/hikes
 // @desc     Add profile hikes
 // @access   Private
 router.put('/APIhikes',
-    [auth, [
-        check('hikeData', 'Missing hike data').not().isEmpty(),
-    ]
-    ],
+    [auth, [check('hikeData', 'Missing hike data').not().isEmpty(),]],
     async (req, res) => {
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { hikeData, } = req.body;
-        const newHike = { hikeData, };
+        const { hikeData } = req.body;
+        const newHike = { hikeData };
         try {
+
             const profile = await Profile.findOne({ user: req.user.id });
-            const foundHike = profile.hikingprojecttrails2.filter(item=>item.hikeData === hikeData )
-            if(foundHike.length ===0) await profile.hikingprojecttrails2.unshift(newHike);
+            const foundHike = profile.hikingprojecttrails2.filter(item => item.hikeData === hikeData)
+            if (foundHike.length === 0) await profile.hikingprojecttrails2.unshift(newHike);
+
             await profile.save();
             res.json(profile);
         } catch (err) {
@@ -262,15 +259,16 @@ router.delete('/APIhikes/:hike_id', auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
         const expIds = foundProfile.hikingprojecttrails2.map(exp => exp._id.toString());
-        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /hikes/5
+        // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /APIhikes/5
         const removeIndex = expIds.indexOf(req.params.hike_id);
-        if (removeIndex === -1) {
-            return res.status(500).json({ msg: "Server error" });
-        } else {
+
+        if (removeIndex === -1) return res.status(500).json({ msg: "Server error" });
+        else {
             foundProfile.hikingprojecttrails2.splice(removeIndex, 1);
             await foundProfile.save();
             return res.status(200).json(foundProfile);
         }
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ msg: "Server error" });
@@ -286,13 +284,14 @@ router.delete('/hikes/:hike_id', auth, async (req, res) => {
         const expIds = foundProfile.hikes.map(exp => exp._id.toString());
         // if i dont add .toString() it returns this weird mongoose coreArray and the ids are somehow objects and it still deletes anyway even if you put /hikes/5
         const removeIndex = expIds.indexOf(req.params.hike_id);
-        if (removeIndex === -1) {
-            return res.status(500).json({ msg: "Server error" });
-        } else {
+
+        if (removeIndex === -1) return res.status(500).json({ msg: "Server error" });
+        else {
             foundProfile.hikes.splice(removeIndex, 1);
             await foundProfile.save();
             return res.status(200).json(foundProfile);
         }
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ msg: "Server error" });
@@ -302,10 +301,8 @@ router.delete('/hikes/:hike_id', auth, async (req, res) => {
 // @route    PUT api/profile/courses
 // @desc     Add profile course
 // @access   Private
-router.put(
-    '/courses',
-    [
-        auth,
+router.put('/courses',
+    [auth,
         [
             check('authority', 'Authority is required').not().isEmpty(),
             check('name', 'Course name is required').not().isEmpty(),
@@ -338,8 +335,10 @@ router.put(
         try {
             const profile = await Profile.findOne({ user: req.user.id });
             profile.courses.unshift(newCourse);
+
             await profile.save();
             res.json(profile);
+
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
@@ -347,6 +346,9 @@ router.put(
     }
 );
 
+// @route    DELETE api/profile/courses/:course_id
+// @desc     Delete a course from profile
+// @access   Private
 router.delete("/courses/:course_id", auth, async (req, res) => {
     try {
         const foundProfile = await Profile.findOne({ user: req.user.id });
@@ -356,32 +358,19 @@ router.delete("/courses/:course_id", auth, async (req, res) => {
         if (removeIndex === -1) {
             return res.status(500).json({ msg: "Server error" });
         } else {
-            foundProfile.courses.splice(
-                removeIndex,
-                1,
-            );
+            foundProfile.courses.splice(removeIndex, 1);
             await foundProfile.save();
             return res.status(200).json(foundProfile);
         }
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ msg: "Server error" });
     }
 });
 
-
-// @route    GET api/profile/hiking-project/:lat/:long/:distance
-// @desc     Get trails from hiking project api using coordonates
-// @access   Public
-// router.get('/hiking-project/:lat/:long/:distance', (req, res) => {
-
-
-
-
-// })
-
 // @route    GET api/profile/unsplash/:subject
-// @desc     Get random images from Unsplash
+// @desc     Get 4 random images from Unsplash based on user designated subject
 // @access   Private
 router.get('/unsplash/:subject', auth, (req, res) => {
     try {
@@ -389,16 +378,16 @@ router.get('/unsplash/:subject', auth, (req, res) => {
             applicationId: `${config.get('unsplashAccessKey')}`,
             secret: `${config.get('unsplashSecret')}`
         });
-        unsplash.photos.getRandomPhoto({ count: "4", width: 100, height: 100, featured: true, query: req.params.subject })
+        unsplash.photos
+            .getRandomPhoto({ count: "4", width: 100, height: 100, featured: true, query: req.params.subject })
             .then(toJson)
             .then(json => {
                 const resp = json.map(item => { return item.urls })
                 return res.status(200).json(resp);
             });
 
-
     } catch (err) {
-        console.error("aa", err.message);
+        console.error("Error with unsplash query", err.message);
         res.status(500).send('Server Error');
     }
 })

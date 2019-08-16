@@ -4,16 +4,20 @@ const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('config')
-// express validator
 const { check, validationResult } = require('express-validator')
 const User = require('../../models/User')
 
+
+// @route    POST api/user
+// @desc     Register a new user
+// @access   Public
 router.post('/',
     [
         check('name', 'Name is required').not().isEmpty(),
         check('email', 'Please include valid email').isEmail(),
         check('password', 'Please enter pass > 6 chars').isLength({ min: 6 })
     ], async (req, res) => {
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array })
@@ -23,15 +27,9 @@ router.post('/',
         try {
             let user = await User.findOne({ email })
             if (user) { res.status(400).json({ errors: [{ msg: 'User already exists' }] }) }
-            const avatar = gravatar.url(email, {
-                s: '200',
-                r: 'pg',
-                d: 'mm'
-            })
+            const avatar = gravatar.url(email, { s: '200', r: 'pg', d: 'mm' })
 
-            user = new User({
-                name, email, avatar, password
-            })
+            user = new User({ name, email, avatar, password })
 
             const salt = await bcrypt.genSalt(10);
 
@@ -45,7 +43,6 @@ router.post('/',
                     if (err) throw err;
                     res.json({ token })
                 })
-
 
         } catch (err) {
             console.error(err.message);

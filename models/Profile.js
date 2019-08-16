@@ -31,13 +31,6 @@ const ProfileSchema = new mongoose.Schema({
                 required: true,
             }
         }],
-    hikingprojecttrails1: [
-        {
-            hikeData: {
-                type: String,
-                required: true,
-            }
-        }],
     hikes: [
         {
             name: {

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import ReactStars from 'react-stars'
 
+
 const ProfileHikingProject = ({ trails }) => {
+
     return (
         <div className='profile-hiking-project'>
 
@@ -11,9 +13,10 @@ const ProfileHikingProject = ({ trails }) => {
             {trails === null ?
                 <Spinner /> :
 
-                trails && trails.length > 0 ? trails.map((stringTrail, i) => {
+                (trails && trails.length > 0 ? trails.map((stringTrail, i) => {
 
                     const trail = JSON.parse(stringTrail.hikeData);
+
                     return (
                         <div key={i} className='indiv-hike bg-white p-1 my-1'>
 
@@ -41,7 +44,7 @@ const ProfileHikingProject = ({ trails }) => {
                             </div>
                         </div>
                     )
-                }) : <h4>No hikes found</h4>
+                }) : <h4>No hikes found</h4>)
             }
         </div>
     );

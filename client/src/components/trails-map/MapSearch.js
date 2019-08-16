@@ -6,10 +6,12 @@ import MapRender from "./MapRender"
 import ResultsOverview from "./ResultsOverview"
 import ResultsList from "./ResultsList"
 import FilterMenu from "./FilterMenu"
+import ChangeRadiusMenu from './ChangeRadiusMenu';
 import SavedTrailsBtn from "./SavedTrailsBtn"
 import DisplayLargePicture from "./DisplayLargePicture"
 import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
+
 
 
 const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
@@ -17,9 +19,13 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
     useEffect(() => { if (isAuthenticated) getCurrentProfile() }, [getCurrentProfile, isAuthenticated]);
 
     const [filterValues, setFilter] = useState(initialFilterValues);
+    const [viewSavedTrails, setViewSavedTrails] = useState(false);
+    const [viewPicture, setViewPicture] = useState(false);
+    const [radius, setRadius] = useState(50);
     const [mapCoordonates, setMapCoordonates] = useState({
         latitude: 48,
         longitude: -119,
+        // Map circle will only be shown if the user has already selected some trails
         displayCircle: hikingProject.length ? true : false
     })
 
@@ -42,18 +48,22 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
         );
     };
 
-    const [viewSavedTrails, setViewSavedTrails] = useState(false);
     const toggleSaved = async () => {
+        // Only update/fetch the users profile if toggling trails on, not off
         if (!viewSavedTrails) await getCurrentProfile()
         await setViewSavedTrails(!viewSavedTrails)
     }
 
-    const [viewPicture, setViewPicture] = useState(false);
     const togglePicture = (pictureUrl) => { setViewPicture(pictureUrl) }
+
+    const changeRadius = (newRadius) => {
+        setRadius(newRadius)
+        getHikingProjectTrails(mapCoordonates.latitude, mapCoordonates.longitude, newRadius)
+    }
 
     const mapClicked = (e) => {
         setMapCoordonates({ latitude: e.latLng.lat(), longitude: e.latLng.lng(), displayCircle: true })
-        getHikingProjectTrails(e.latLng.lat(), e.latLng.lng())
+        getHikingProjectTrails(e.latLng.lat(), e.latLng.lng(), radius)
     }
 
     return (
@@ -66,6 +76,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                 <SavedTrailsBtn viewSavedTrails={viewSavedTrails} toggleSaved={toggleSaved} />}
 
             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
+            <ChangeRadiusMenu changeRadius={changeRadius} radius={radius} />
 
             <div className="resultsContainer">
                 <MapRender
@@ -74,13 +85,13 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                     mapCoordonates={mapCoordonates}
                     viewSavedTrails={viewSavedTrails}
                     userProfile={userProfile}
+                    radius={radius}
                 />
                 <ResultsList
-                    togglePicture={togglePicture}
-                    viewSavedTrails={viewSavedTrails}
-                    userProfile={userProfile}
                     trails={filteredTrails}
-                    isAuthenticated={isAuthenticated}
+                    viewSavedTrails={viewSavedTrails}
+                    togglePicture={togglePicture}
+                    userProfile={userProfile}
                 />
             </div>
 

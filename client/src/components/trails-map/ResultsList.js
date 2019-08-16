@@ -7,19 +7,18 @@ import ResultsCard from "./ResultsCard"
 import { addAPIHike, deleteAPIHike } from '../../actions/profile'
 
 
-const ResultsList = ({ trails, addAPIHike, deleteAPIHike, viewSavedTrails, togglePicture, userProfile }) => {
+const ResultsList = ({ trails, viewSavedTrails, togglePicture, userProfile, addAPIHike, deleteAPIHike }) => {
 
     const deleteTrail = (id) => { deleteAPIHike(id) }
     const saveTrail = (data) => { addAPIHike({ "hikeData": JSON.stringify(data) }) }
     const displaySavedTrails = viewSavedTrails && userProfile && userProfile.hikingprojecttrails2
     const displayList = trails.length > 0 || displaySavedTrails
 
-
     return (
         <div
             className="trail-list-flex"
             style={displayList ?
-                { width: "500px", transistionDelay: "0s" } :
+                { width: "600px", transistionDelay: "0s" } :
                 { width: "0px", transistionDelay: "5s" }}
         >
             <div>
@@ -65,11 +64,11 @@ const ResultsList = ({ trails, addAPIHike, deleteAPIHike, viewSavedTrails, toggl
 
 ResultsList.propTypes = {
     trails: PropTypes.array.isRequired,
-    addAPIHike: PropTypes.func.isRequired,
-    deleteAPIHike: PropTypes.func.isRequired,
     viewSavedTrails: PropTypes.bool.isRequired,
     togglePicture: PropTypes.func.isRequired,
     userProfile: PropTypes.object,
+    addAPIHike: PropTypes.func.isRequired,
+    deleteAPIHike: PropTypes.func.isRequired
 }
 
 export default connect(null, { addAPIHike, deleteAPIHike })(ResultsList);

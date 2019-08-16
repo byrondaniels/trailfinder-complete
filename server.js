@@ -2,9 +2,9 @@ const express = require('express')
 const connectDB = require('./config/db')
 // The following is added for when we are ready to push to production
 const path = require('path')
+//
 
 const app = express();
-
 connectDB()
 
 // Fun fact - bodyparser is now included with express
@@ -27,8 +27,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
-
-
 
 const PORT = process.env.PORT || 5000;
 

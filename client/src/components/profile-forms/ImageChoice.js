@@ -17,18 +17,30 @@ const ImageChoice = ({ images, getRandomUnsplashImages, onChangeImg, externalImg
             <div className="word-container" >
                 <div className="indiv-word">Choose an image type</div>
                 {selectionChoices.map((word, index) => {
-                    return (<div className="indiv-word sel-option" onClick={() => { getRandomUnsplashImages(word) }} key={index} >{word}</div>)
-                })} </div>
+                    return (
+                        <div
+                            className="indiv-word sel-option"
+                            key={index}
+                            onClick={() => { getRandomUnsplashImages(word) }}
+                        >{word}</div>)
+                })}
+            </div>
+
             <div className="images-container">
                 {images ? images.map((image, index) => {
                     return (
-                        <div key={index} name="externalImg" onClick={() => { onChangeImg(image.small) }}>
-                            <div className={classNames({
-                                "img-wrap": image.small !== externalImg
-                            })}>
-                                <div className='indiv-img' style={{
-                                    backgroundImage: `url(${image.small})`
-                                }} />
+                        <div
+                            key={index}
+                            name="externalImg"
+                            onClick={() => { onChangeImg(image.small) }}>
+                            <div className={
+                                classNames({
+                                    "img-wrap": image.small !== externalImg
+                                })}>
+                                <div
+                                    className='indiv-img'
+                                    style={{ backgroundImage: `url(${image.small})` }}
+                                />
                             </div>
                         </div>)
                 }) : <Spinner />}
@@ -42,10 +54,7 @@ ImageChoice.propTypes = {
     images: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
-    images: state.profile.images
-});
-
+const mapStateToProps = state => ({ images: state.profile.images });
 
 export default connect(mapStateToProps,
     { getRandomUnsplashImages }

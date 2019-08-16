@@ -566,6 +566,7 @@ width: 150px;
   background-position: center center;
   object-fit: cover;
   background-size: cover;
+  margin: auto;
 }
 
 /* Map Search Styling */
@@ -612,6 +613,7 @@ width: 150px;
 
 .dropdown-content {
   display: none;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .dropdown:hover .dropdown-content {
@@ -631,7 +633,12 @@ width: 150px;
   left: 180px;
 }
 .drop2{
-  left: 254px;
+  left: 264px;
+}
+
+.drop2 span{
+  align-self: center;
+  padding: 0px 8px;
 }
 
 .mapBtn:hover{
@@ -687,8 +694,10 @@ width: 150px;
   display: flex;
   justify-content: space-around;
   flex-basis: 100vh;
+  width: 100%;
 }
 .resultsOverview{
+  z-index: 5000;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -703,7 +712,7 @@ width: 150px;
 }
 .trail-list-flex {
   display: flex;
-  padding-top: 29px;
+  padding-top: 6px;
   flex-wrap: wrap;
   align-content: flex-start;
   overflow-y: scroll;
@@ -719,6 +728,7 @@ width: 150px;
 width: 400px;
 position: absolute;
 }
+
 .list-padding{
   height: 10vh;
 }
@@ -737,9 +747,8 @@ position: absolute;
   border-radius: 2px;
 }
 .hike-card {
-  /* height: 150px; */
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-left: 4px;
   margin-right: 4px;
   margin-bottom: 2px;
@@ -756,6 +765,10 @@ position: absolute;
   display: flex;
   flex-direction: row;
 }
+.hike-card{
+  border: red solid 2px;
+}
+
 .hike-card:hover {
   border: white solid 2px;
   cursor: pointer;
@@ -768,7 +781,7 @@ position: absolute;
 }
 .hike-content{
   width: 300px;
-  padding-left: 5px;
+  padding: 0px 20px 0px 5px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -794,7 +807,7 @@ position: absolute;
 }
 
 .mas-10{
-  padding: 0px 10px;
+  padding: 0px 20px 0px 5px;
   margin: 0px 10px;
 }
 
@@ -810,9 +823,11 @@ position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(100vw - 300px);
-  height: calc(100vh - 70px);
+  width: calc(100vw - 400px);
+  height: calc(100vh - 120px);
   position: absolute;
+  border: solid red 2px;
+  z-index: 999999;
 }
 
 .exit-btn{
@@ -839,12 +854,26 @@ cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: purple;
+  background: white;
 }
 
 .hike-image:hover .hover-image{
   opacity: 0.333;
 }
+
+.spinner{
+  width: 200px;
+  margin: auto;
+  display: block;
+  margin-top: 20vh;
+}
+
+.slider {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+
 
 
 /* Mobile Styles */
@@ -862,6 +891,9 @@ cursor: pointer;
   text-align: center;
   justify-content: center;
   background: var(--dark-color);
+  position: absolute;
+  top: 44px;
+  left: 0px;
 }
 
 .navbar h1 {
@@ -877,8 +909,31 @@ cursor: pointer;
 @media (max-width: 800px) {
 
 
+  /* 
+  The below was used in initial styling but after changing menu layout its no longer needed?
   .container {
     margin-top: 8rem;
+  } */
+
+  .mapBtn{
+    top: 50px;
+  }
+
+  .map3{
+    left: 10px;
+  }
+  .map1{
+    left: 98px;
+    width: 81px;
+  }
+  .drop2{
+    left: 20px;
+  }
+  .drop1{
+    left: 96px;
+  }
+  .dropdown-content{
+    top: 90px !important;
   }
 
   .hide-sm {
@@ -927,6 +982,8 @@ cursor: pointer;
   .profile-about .skills {
     flex-direction: column;
   }
+
+
 
   .dash-buttons a {
     display: block;

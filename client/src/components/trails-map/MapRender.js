@@ -23,7 +23,8 @@ const MapRender = compose(
         trails,
         viewSavedTrails,
         mapCoordonates: { latitude, longitude, displayCircle },
-        userProfile
+        userProfile,
+        radius
     } = props
 
     return (
@@ -41,7 +42,7 @@ const MapRender = compose(
                         lat: latitude,
                         lng: longitude
                     }}
-                    radius={100 * 3000}
+                    radius={2000 * radius}
                     options={{
                         strokeColor: '#95a3b3',
                         fillOpacity: 0.1,

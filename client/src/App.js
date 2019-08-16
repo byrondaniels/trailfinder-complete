@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux';
 
-import './App.css';
-
-
 import NavBar from "./components/layout/NavBar"
 import Landing from "./components/layout/Landing"
 import Login from "./components/auth/Login"
@@ -27,15 +24,13 @@ import MapSearch from './components/trails-map/MapSearch'
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken'
 import store from './store'
+import './App.css';
 
 
 if (localStorage.token) { setAuthToken(localStorage.token) }
 
-
 const App = () => {
-
   useEffect(() => { store.dispatch(loadUser()) }, [])
-
   return (
     <Provider store={store}>
       <Router>
@@ -61,9 +56,11 @@ const App = () => {
           </Switch>
 
           <Alert />
+
         </div>
       </Router>
     </Provider >
   )
 }
+
 export default App;

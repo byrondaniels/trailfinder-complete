@@ -54,7 +54,9 @@ const ResultsCard = ({
 
                     <span>Length: {lengthKM} km</span>
                     <span>Ascent: {ascentM} m</span>
-
+                    {/* If the user is not logged in, no button will be shown.
+                    Otherwise we are checking whether the trail has been saved
+                    .. At which point we will then show the delete button, else.. "Save" btn */}
                     {isLoggedIn ? alreadySaved && !alreadySaved.length ?
                         <button id="saveBtn"
                             className="btn-dark btn"
@@ -81,7 +83,7 @@ ResultsCard.propTypes = {
     isLoggedIn: PropTypes.object,
     deleteTrail: PropTypes.func.isRequired,
     togglePicture: PropTypes.func.isRequired,
-    alreadySaved: PropTypes.string.isRequired,
+    alreadySaved: PropTypes.string,
     saveBtnPayload: PropTypes.object,
     saveTrailBtn: PropTypes.func
 }

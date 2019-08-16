@@ -14,7 +14,7 @@ const PostForm = ({ addPost }) => {
         <div className='post-form res-width'>
 
             <div className='bg-primary p'>
-                <h3>Talk about a hike you're thinking about...</h3>
+                <h3>What hike are you thinking about...</h3>
             </div>
 
             <form

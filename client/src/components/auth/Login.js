@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+
 import { login } from '../../actions/auth'
 
 
@@ -19,9 +20,10 @@ const Login = ({ login, isAuthenticated }) => {
     return (
         <div className="res-width">
             <h1 className="large text-primary">Sign In</h1>
-            <p className="lead"><i className="fas fa-user"></i> Sign In To Your Account</p>
+            <p className="lead"><i className="fas fa-user" /> Sign In To Your Account</p>
             <form className="form" onSubmit={e => onSubmit(e)}>
-                <div className="form-group">
+                <div
+                    className="form-group">
                     <input
                         type="email"
                         placeholder="Email Address"
@@ -30,7 +32,8 @@ const Login = ({ login, isAuthenticated }) => {
                         onChange={e => onChange(e)}
                     />
                 </div>
-                <div className="form-group">
+                <div
+                    className="form-group">
                     <input
                         type="password"
                         placeholder="Password"

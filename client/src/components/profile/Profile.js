@@ -20,6 +20,7 @@ const Profile = ({
 }) => {
 
     useEffect(() => { getProfileById(match.params.id) }, [getProfileById, match.params.id]);
+    const displayEditProfileButton = auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id
 
     return (
         <div className="res-width">
@@ -31,9 +32,7 @@ const Profile = ({
                         Back To Profiles
                     </Link>
 
-                    {auth.isAuthenticated &&
-                        auth.loading === false &&
-                        auth.user._id === profile.user._id &&
+                    {displayEditProfileButton &&
                         <Link to='/edit-profile' className='btn btn-dark'>
                             Edit Profile
                         </Link>

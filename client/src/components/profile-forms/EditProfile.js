@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -43,18 +43,21 @@ const EditProfile = ({
         youtube,
         instagram,
     } = formData;
+
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
+
     const onChangeImg = imageUrl =>
         setFormData({ ...formData, "externalImg": imageUrl });
+
     const onSubmit = e => {
         e.preventDefault();
         createProfile(formData, history, true);
     };
-    useEffect(() => {
-        console.log('called use effect')
-        getCurrentProfile();
 
+
+
+    const setInitialFormData = useCallback(() => {
         setFormData({
             blog: loading || !profile.blog ? "" : profile.blog,
             location: loading || !profile.location ? "" : profile.location,
@@ -68,7 +71,13 @@ const EditProfile = ({
             youtube: loading || !profile.social ? "" : profile.social.youtube,
             instagram: loading || !profile.social ? "" : profile.social.instagram,
         })
-    }, [getCurrentProfile, profile.blog, profile.location, profile.status, profile.skills, profile.bio, profile.externalImg, profile.social, profile.social.twitter, profile.social.facebook, profile.social.linkedin, profile.social.youtube, profile.social.instagram, loading]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
+    useMemo(() => { getCurrentProfile(); setInitialFormData() },
+        [getCurrentProfile, setInitialFormData]);
+
     return !loading && profile !== null ? (
         <div className="res-width">
             <h1 className='large text-primary'>Edit Your Profile</h1>
@@ -210,28 +219,33 @@ const EditProfile = ({
                     <span>Optional</span>
                 </div>
 
-
-                {displayImageEntry && (
-                    <>
-                        <ImageChoice onChangeImg={onChangeImg} externalImg={externalImg} />
-                    </>
-                )}
-                <input type='submit' className='btn btn-primary my-1' />
-                <Link className='btn btn-light my-1' to='/dashboard'>
+                {displayImageEntry &&
+                    <ImageChoice
+                        onChangeImg={onChangeImg}
+                        externalImg={externalImg}
+                    />}
+                <input
+                    type='submit'
+                    className='btn btn-primary my-1'
+                />
+                <Link
+                    className='btn btn-light my-1'
+                    to='/dashboard'>
                     Go Back
                 </Link>
             </form>
         </div>
-    ) : (<Redirect to='/dashboard' />);
+    ) : <Redirect to='/dashboard' />
 };
+
 EditProfile.propTypes = {
     createProfile: PropTypes.func.isRequired,
     getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
 };
-const mapStateToProps = state => ({
-    profile: state.profile,
-});
+
+const mapStateToProps = state => ({ profile: state.profile, });
+
 export default connect(
     mapStateToProps,
     { createProfile, getCurrentProfile },

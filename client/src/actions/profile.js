@@ -56,9 +56,9 @@ export const getProfileById = (userId) => async dispatch => {
 
 
 // Get hiking trails from hiking project
-export const getHikingProjectTrails = (lat, long, distance = 200) => async dispatch => {
+export const getHikingProjectTrails = (lat, long, radius) => async dispatch => {
     try {
-        const link = `https://www.hikingproject.com/data/get-trails?maxResults=200&lat=${lat}&lon=${long}&maxDistance=${distance}&key=${hikingProjectKey}`
+        const link = `https://www.hikingproject.com/data/get-trails?maxResults=200&lat=${lat}&lon=${long}&maxDistance=${radius}&key=${hikingProjectKey}`
         const res = await fetch(link).then(response => response.json())
 
         dispatch({ type: GET_HIKING_PROJECT_TRAILS, payload: res.trails })

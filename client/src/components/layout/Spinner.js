@@ -4,8 +4,8 @@ import spinner from './circles.svg';
 export default () => (
     <>
         <img
+            className="spinner"
             src={spinner}
-            style={{ width: '200px', margin: 'auto', display: 'block' }}
             alt='Loading...'
         />
     </>

@@ -42,7 +42,7 @@ const PostItem = ({
                             className='btn btn-light'
                         >
                             <i className='fas fa-thumbs-up' />{' '}
-                            <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+                            {likes.length > 0 && <span>{likes.length}</span>}
                         </button>
 
                         <button
@@ -56,8 +56,7 @@ const PostItem = ({
                         <Link to={`/posts/${_id}`} className='btn btn-primary'>
                             Discussion{' '}
                             {comments.length > 0 &&
-                                <span className='comment-count'>{comments.length}</span>
-                            }
+                                <span className='comment-count'>{comments.length}</span>}
                         </Link>
 
                         {!auth.loading && user === auth.user._id &&

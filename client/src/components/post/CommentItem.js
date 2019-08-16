@@ -17,9 +17,11 @@ const CommentItem = ({
 
             <div>
                 <Link to={`/profile/${user}`}>
-                    <div className='round-img post-img' style={{
-                        backgroundImage: `url(${avatar && avatar})`
-                    }} />
+                    <div
+                        className='round-img post-img'
+                        style={{
+                            backgroundImage: `url(${avatar && avatar})`
+                        }} />
                     <h4>{name}</h4>
                 </Link>
             </div>
