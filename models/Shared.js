@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const APIHikePostSchema = new Schema({
+const SharedSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
@@ -61,4 +61,4 @@ const APIHikePostSchema = new Schema({
     }
 })
 
-module.exports = APIHikePost = mongoose.model('APIHikePost', APIHikePostSchema)
+module.exports = Shared = mongoose.model('Shared', SharedSchema)

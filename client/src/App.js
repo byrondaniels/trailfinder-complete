@@ -17,7 +17,9 @@ import Profiles from './components/profiles/Profiles'
 import CreateProfile from './components/profile-forms/CreateProfile'
 import EditProfile from './components/profile-forms/EditProfile'
 import Posts from './components/posts/Posts'
+import Shared from './components/posts/Shared'
 import Post from './components/post/Post'
+import OneShared from './components/post/OneShared'
 import PostForm from './components/posts/PostForm'
 import MapSearch from './components/trails-map/MapSearch'
 
@@ -50,6 +52,8 @@ const App = () => {
             <PrivateRoute exact path="/add-hike" component={AddHike} />
             <PrivateRoute exact path="/add-course" component={AddCourse} />
             <PrivateRoute exact path="/posts" component={Posts} />
+            <PrivateRoute exact path="/shared" component={Shared} />
+            <PrivateRoute exact path="/one-shared/:id" component={OneShared} />
             <PrivateRoute exact path="/make-post" component={PostForm} />
             <PrivateRoute exact path="/posts/:id" component={Post} />
             <Route component={UnknownRoute} />

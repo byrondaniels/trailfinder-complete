@@ -2,20 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 
-const DisplayLargePicture = ({ url, togglePicture }) => (
-    <div className="large-picture-container">
+const DisplayLargePicture = ({ url, hidePicture }) => (
+    <>
+        <div onClick={hidePicture} className="large-picture-container enlarge-sm red">
 
-        <div className="large-picture"
-            style={{ backgroundImage: `url(${url})` }}>
-            <div onClick={() => togglePicture(null)} className="exit-btn">X</div>
+            <div className="large-picture res-post post-sm"
+                style={{ backgroundImage: `url(${url})` }}>
+            </div>
+
+
         </div>
-
-    </div>
+        <div className="large-picture-container bg-fade enlarge-sm" />
+    </>
 );
 
 DisplayLargePicture.propTypes = {
     url: PropTypes.string.isRequired,
-    togglePicture: PropTypes.func.isRequired,
+    hidePicture: PropTypes.func.isRequired,
 }
 
 export default DisplayLargePicture;

@@ -71,7 +71,7 @@ const ResultsCard = ({
                             Delete
                         </button> : null}
                     {/* The below will be isLoggedIn once functionality is complete */}
-                    {false &&
+                    {isLoggedIn &&
                         <button id="postBtn"
                             className="btn-dark btn"
                             onClick={(e) => { e.stopPropagation(); showPostForm(trailData) }}>

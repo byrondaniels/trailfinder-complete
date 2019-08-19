@@ -55,6 +55,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
     }
 
     const togglePicture = (pictureUrl) => { setViewPicture(pictureUrl) }
+    const hidePicture = () => { setViewPicture("") }
 
     const changeRadius = (newRadius) => {
         setRadius(newRadius)
@@ -81,7 +82,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
             <ChangeRadiusMenu changeRadius={changeRadius} radius={radius} />
 
             {viewPicture &&
-                <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
+                <DisplayLargePicture url={viewPicture} hidePicture={hidePicture} />}
 
             {displayPostForm &&
                 <MapPostForm displayPostForm={displayPostForm} hidePostForm={hidePostForm} />}

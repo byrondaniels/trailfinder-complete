@@ -2,18 +2,23 @@ import {
     GET_POSTS,
     POST_ERROR,
     UPDATE_LIKES,
+    UPDATE_SHARED_LIKES,
     DELETE_POST,
     ADD_POST,
-    ADD_API_HIKE_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    ADD_SHARED,
+    GET_SHARED,
+    GET_ONE_SHARED,
+    DELETE_SHARED
 } from '../actions/types';
 
 const initialState = {
     posts: [],
-    apiHikePosts: [],
     post: null,
+    shared: [],
+    oneShared: null,
     loading: true,
     error: {}
 };
@@ -41,11 +46,28 @@ export default function (state = initialState, action) {
                 posts: [payload, ...state.posts],
                 loading: false
             };
-        case ADD_API_HIKE_POST:
-            console.log("called 696969")
+        case GET_ONE_SHARED:
             return {
                 ...state,
-                apiHikePosts: [payload, ...state.apiHikePosts],
+                oneShared: payload,
+                loading: false
+            };
+        case GET_SHARED:
+            return {
+                ...state,
+                shared: payload,
+                loading: false
+            };
+        case ADD_SHARED:
+            return {
+                ...state,
+                shared: [payload, ...state.shared],
+                loading: false
+            };
+        case DELETE_SHARED:
+            return {
+                ...state,
+                shared: state.shared.filter(share => share._id !== payload),
                 loading: false
             };
         case DELETE_POST:
@@ -64,6 +86,14 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 posts: state.posts.map(post =>
+                    post._id === payload.id ? { ...post, likes: payload.likes } : post
+                ),
+                loading: false
+            };
+        case UPDATE_SHARED_LIKES:
+            return {
+                ...state,
+                shared: state.shared.map(post =>
                     post._id === payload.id ? { ...post, likes: payload.likes } : post
                 ),
                 loading: false
