@@ -73,7 +73,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     return (
         <div className="mapContainer2">
-
+            {/* // Buttons for interacting with google map */}
             {isAuthenticated &&
                 <SavedTrailsBtn viewSavedTrails={viewSavedTrails} toggleSaved={toggleSaved} />}
 
