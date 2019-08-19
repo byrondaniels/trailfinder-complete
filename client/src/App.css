@@ -149,6 +149,15 @@ img {
     bottom: 8px;
     padding: 2px;
 }
+#postBtn{
+  width: 90px;
+  position: absolute;
+  /* right: -2px; */
+  left: 120px;
+  margin-right: 0px;
+  bottom: 8px;
+  padding: 2px;
+}
 #elop{
   background: orange;
 }
@@ -598,7 +607,7 @@ width: 150px;
 }
 
 .map2{
-  left: 255px;
+  left: 345px;
   border: solid 1px;
   z-index: 2;
 }
@@ -765,9 +774,9 @@ position: absolute;
   display: flex;
   flex-direction: row;
 }
-.hike-card{
+/* .hike-card{
   border: red solid 2px;
-}
+} */
 
 .hike-card:hover {
   border: white solid 2px;
@@ -826,8 +835,25 @@ position: absolute;
   width: calc(100vw - 400px);
   height: calc(100vh - 120px);
   position: absolute;
-  border: solid red 2px;
-  z-index: 999999;
+  /* border: solid red 2px; */
+  z-index: 999;
+}
+
+.large-post-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(100vw - 400px);
+  height: calc(100vh - 120px);
+  position: absolute;
+  /* border: solid red 2px; */
+  background: white;
+  z-index: 1999;
+}
+
+.rangeslider__fill{
+background: #343a40 !important;
 }
 
 .exit-btn{
@@ -872,6 +898,20 @@ cursor: pointer;
   margin: 0;
   padding: 0;
   width: 200px;
+}
+
+.m-auto{
+  margin: auto;
+  margin-top: 3px;
+  padding-bottom: 20px;
+}
+
+.quitbtn{
+  margin: 10px;
+}
+
+.fortvw{
+  width: 40vw;
 }
 
 
@@ -935,6 +975,8 @@ cursor: pointer;
   .dropdown-content{
     top: 90px !important;
   }
+
+
 
   .hide-sm {
     display: none;

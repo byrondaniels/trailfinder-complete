@@ -4,7 +4,8 @@ import {
     GET_POSTS, POST_ERROR,
     UPDATE_LIKES, DELETE_POST,
     ADD_POST, GET_POST,
-    ADD_COMMENT, REMOVE_COMMENT
+    ADD_COMMENT, REMOVE_COMMENT,
+    ADD_API_HIKE_POST
 } from './types';
 
 
@@ -91,6 +92,24 @@ export const addPost = formData => async dispatch => {
     }
 };
 
+// Add API Hike post
+export const addAPIHikePost = formData => async dispatch => {
+
+    const config = { headers: { 'Content-Type': 'application/json' } };
+
+    try {
+        const res = await axios.post('/api/APIHikeposts', formData, config);
+
+        dispatch({ type: ADD_API_HIKE_POST, payload: res.data });
+        dispatch(setAlert('Post Created', 'success'));
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
 
 // Get post
 export const getPost = id => async dispatch => {

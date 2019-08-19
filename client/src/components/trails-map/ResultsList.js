@@ -7,7 +7,7 @@ import ResultsCard from "./ResultsCard"
 import { addAPIHike, deleteAPIHike } from '../../actions/profile'
 
 
-const ResultsList = ({ trails, viewSavedTrails, togglePicture, userProfile, addAPIHike, deleteAPIHike }) => {
+const ResultsList = ({ trails, viewSavedTrails, togglePicture, userProfile, addAPIHike, deleteAPIHike, showPostForm }) => {
 
     const deleteTrail = (id) => { deleteAPIHike(id) }
     const saveTrail = (data) => { addAPIHike({ "hikeData": JSON.stringify(data) }) }
@@ -36,6 +36,7 @@ const ResultsList = ({ trails, viewSavedTrails, togglePicture, userProfile, addA
                                 deleteTrail={deleteTrail}
                                 togglePicture={togglePicture}
                                 alreadySaved={stringTrail._id}
+                                showPostForm={showPostForm}
                             />)
                     })
                 }
@@ -54,6 +55,7 @@ const ResultsList = ({ trails, viewSavedTrails, togglePicture, userProfile, addA
                                     .filter(value => value !== 0)}
                                 saveBtnPayload={trail}
                                 saveTrailBtn={saveTrail}
+                                showPostForm={showPostForm}
                             />)
                     })
                 }
