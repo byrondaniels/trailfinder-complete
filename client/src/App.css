@@ -852,6 +852,7 @@ position: absolute;
   z-index: 1999;
 }
 
+/* Over-riding default color value for react-rangeslider */
 .rangeslider__fill{
 background: #343a40 !important;
 }
