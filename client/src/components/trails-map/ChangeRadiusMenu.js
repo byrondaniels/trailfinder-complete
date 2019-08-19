@@ -13,7 +13,7 @@ const ChangeRadiusMenu = ({ radius, changeRadius }) => {
         <div className="dropdown" >
             <div className="mapBtn map3" >Radius</div>
             <div className="dropdown-content drop2">
-                <span>{radius} km </span>
+                <span>{Math.round(radius * 2.3)} km </span>
                 <Slider
                     min={10}
                     step={10}

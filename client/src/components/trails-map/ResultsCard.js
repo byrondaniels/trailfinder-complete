@@ -13,6 +13,7 @@ const ResultsCard = ({
     alreadySaved,
     saveBtnPayload,
     saveTrailBtn,
+    showPostForm
 }) => {
 
     const { name, length, ascent, summary, imgMedium } = trailData
@@ -69,6 +70,13 @@ const ResultsCard = ({
                             onClick={(e) => { e.stopPropagation(); deleteTrail(alreadySaved) }}>
                             Delete
                         </button> : null}
+                    {/* The below will be isLoggedIn once functionality is complete */}
+                    {false &&
+                        <button id="postBtn"
+                            className="btn-dark btn"
+                            onClick={(e) => { e.stopPropagation(); showPostForm(trailData) }}>
+                            Share
+                        </button>}
 
                 </div>
             </div>
@@ -83,7 +91,7 @@ ResultsCard.propTypes = {
     isLoggedIn: PropTypes.object,
     deleteTrail: PropTypes.func.isRequired,
     togglePicture: PropTypes.func.isRequired,
-    alreadySaved: PropTypes.string,
+    alreadySaved: PropTypes.array, // Does it also come in as type string??
     saveBtnPayload: PropTypes.object,
     saveTrailBtn: PropTypes.func
 }

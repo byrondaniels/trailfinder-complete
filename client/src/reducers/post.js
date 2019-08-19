@@ -4,6 +4,7 @@ import {
     UPDATE_LIKES,
     DELETE_POST,
     ADD_POST,
+    ADD_API_HIKE_POST,
     GET_POST,
     ADD_COMMENT,
     REMOVE_COMMENT
@@ -11,6 +12,7 @@ import {
 
 const initialState = {
     posts: [],
+    apiHikePosts: [],
     post: null,
     loading: true,
     error: {}
@@ -37,6 +39,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 posts: [payload, ...state.posts],
+                loading: false
+            };
+        case ADD_API_HIKE_POST:
+            console.log("called 696969")
+            return {
+                ...state,
+                apiHikePosts: [payload, ...state.apiHikePosts],
                 loading: false
             };
         case DELETE_POST:

@@ -9,9 +9,9 @@ import FilterMenu from "./FilterMenu"
 import ChangeRadiusMenu from './ChangeRadiusMenu';
 import SavedTrailsBtn from "./SavedTrailsBtn"
 import DisplayLargePicture from "./DisplayLargePicture"
+import MapPostForm from "./MapPostForm"
 import { getHikingProjectTrails, getCurrentProfile } from "../../actions/profile"
 import { initialFilterValues } from "./variables"
-
 
 
 const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, userProfile, getCurrentProfile }) => {
@@ -58,25 +58,33 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
 
     const changeRadius = (newRadius) => {
         setRadius(newRadius)
-        getHikingProjectTrails(mapCoordonates.latitude, mapCoordonates.longitude, newRadius)
+        if (mapCoordonates.displayCircle) {
+            getHikingProjectTrails(mapCoordonates.latitude, mapCoordonates.longitude, newRadius)
+        }
     }
 
     const mapClicked = (e) => {
         setMapCoordonates({ latitude: e.latLng.lat(), longitude: e.latLng.lng(), displayCircle: true })
         getHikingProjectTrails(e.latLng.lat(), e.latLng.lng(), radius)
     }
+    const [displayPostForm, setPostForm] = useState("");
+    const showPostForm = (postData) => { setPostForm(postData) }
+    const hidePostForm = () => { setPostForm("") }
 
     return (
         <div className="mapContainer2">
-
-            {viewPicture &&
-                <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
 
             {isAuthenticated &&
                 <SavedTrailsBtn viewSavedTrails={viewSavedTrails} toggleSaved={toggleSaved} />}
 
             <FilterMenu filterValues={filterValues} handleChangeCheckbox={handleChangeCheckbox} />
             <ChangeRadiusMenu changeRadius={changeRadius} radius={radius} />
+
+            {viewPicture &&
+                <DisplayLargePicture url={viewPicture} togglePicture={togglePicture} />}
+
+            {displayPostForm &&
+                <MapPostForm displayPostForm={displayPostForm} hidePostForm={hidePostForm} />}
 
             <div className="resultsContainer">
                 <MapRender
@@ -92,6 +100,7 @@ const MapSearch = ({ hikingProject, getHikingProjectTrails, isAuthenticated, use
                     viewSavedTrails={viewSavedTrails}
                     togglePicture={togglePicture}
                     userProfile={userProfile}
+                    showPostForm={showPostForm}
                 />
             </div>
 
