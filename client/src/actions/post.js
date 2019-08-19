@@ -5,7 +5,9 @@ import {
     UPDATE_LIKES, DELETE_POST,
     ADD_POST, GET_POST,
     ADD_COMMENT, REMOVE_COMMENT,
-    ADD_API_HIKE_POST
+    ADD_SHARED, GET_SHARED,
+    GET_ONE_SHARED, DELETE_SHARED,
+    UPDATE_SHARED_LIKES
 } from './types';
 
 
@@ -15,6 +17,21 @@ export const getPosts = () => async dispatch => {
         const res = await axios.get('/api/posts');
 
         dispatch({ type: GET_POSTS, payload: res.data });
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+// Get shared posts
+export const getShared = () => async dispatch => {
+    try {
+        const res = await axios.get('/api/shared');
+
+        dispatch({ type: GET_SHARED, payload: res.data });
 
     } catch (err) {
         dispatch({
@@ -55,6 +72,35 @@ export const removeLike = id => async dispatch => {
     }
 };
 
+// Add like
+export const addShareLike = id => async dispatch => {
+    try {
+        const res = await axios.put(`/api/shared/like/${id}`);
+
+        dispatch({ type: UPDATE_SHARED_LIKES, payload: { id, likes: res.data } });
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+// Remove like
+export const removeShareLike = id => async dispatch => {
+    try {
+        const res = await axios.put(`/api/shared/unlike/${id}`);
+
+        dispatch({ type: UPDATE_SHARED_LIKES, payload: { id, likes: res.data } });
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
 
 // Delete post
 export const deletePost = id => async dispatch => {
@@ -63,6 +109,24 @@ export const deletePost = id => async dispatch => {
 
         dispatch({ type: DELETE_POST, payload: id });
         dispatch(setAlert('Post Removed', 'success'));
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+
+
+// Delete post
+export const deleteShared = id => async dispatch => {
+    try {
+        await axios.delete(`/api/shared/${id}`);
+
+        dispatch({ type: DELETE_SHARED, payload: id });
+        dispatch(setAlert('Item Removed', 'success'));
 
     } catch (err) {
         dispatch({
@@ -93,15 +157,30 @@ export const addPost = formData => async dispatch => {
 };
 
 // Add API Hike post
-export const addAPIHikePost = formData => async dispatch => {
+export const addSharedPost = formData => async dispatch => {
 
     const config = { headers: { 'Content-Type': 'application/json' } };
 
     try {
-        const res = await axios.post('/api/APIHikeposts', formData, config);
+        const res = await axios.post('/api/shared', formData, config);
 
-        dispatch({ type: ADD_API_HIKE_POST, payload: res.data });
-        dispatch(setAlert('Post Created', 'success'));
+        dispatch({ type: ADD_SHARED, payload: res.data });
+        dispatch(setAlert('Shared Post Created', 'success'));
+
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status }
+        });
+    }
+};
+
+// Get post
+export const getOneShared = id => async dispatch => {
+    try {
+        const res = await axios.get(`/api/shared/${id}`);
+
+        dispatch({ type: GET_ONE_SHARED, payload: res.data });
 
     } catch (err) {
         dispatch({

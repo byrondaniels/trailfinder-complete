@@ -15,7 +15,7 @@ app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/posts', require('./routes/api/posts'))
-app.use('/api/APIHikeposts', require('./routes/api/APIHikeposts'))
+app.use('/api/shared', require('./routes/api/shared'))
 
 // Another line added for production (needs to be added below routes as well
 // Serve static assets in production

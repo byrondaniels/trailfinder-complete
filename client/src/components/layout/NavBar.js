@@ -10,7 +10,12 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const authLinks =
         <ul>
-            <li> <Link to="/trails-map" >Explore Trails</Link> </li>
+            <li>
+                <Link to="/trails-map" >
+                    <i className='fas fa-globe-americas ' />{' '}
+                    <span className="hide-sm">Explore Trails</span>
+                </Link>
+            </li>
             <li> <Link to="/profiles" >Users</Link> </li>
             <li> <Link to="/posts" >Posts</Link> </li>
 

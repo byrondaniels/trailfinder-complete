@@ -3,7 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
-const HikePost = require('../../models/ApiHikePosts');
+const Shared = require('../../models/Shared');
 const User = require('../../models/User');
 
 
@@ -19,10 +19,9 @@ router.post('/',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
         try {
             const user = await User.findById(req.user.id).select('-password');
-            const newPost = new HikePost({
+            const newPost = new Shared({
                 text: req.body.text,
                 userName: user.name,
                 avatar: user.avatar,
@@ -46,7 +45,7 @@ router.post('/',
 // @access   Private
 router.get('/', auth, async (req, res) => {
     try {
-        const posts = await HikePost.find().sort({ date: -1 });
+        const posts = await Shared.find().sort({ date: -1 });
         res.json(posts);
     } catch (err) {
         console.error(err.message);
@@ -59,9 +58,9 @@ router.get('/', auth, async (req, res) => {
 // @access   Private
 router.get('/:id', auth, async (req, res) => {
     try {
-        const post = await HikePost.findById(req.params.id);
+        const post = await Shared.findById(req.params.id);
         if (!post) {
-            return res.status(404).json({ msg: 'Post not found' });
+            return res.status(404).json({ msg: 'Shared post not found' });
         }
 
         res.json(post);
@@ -69,7 +68,7 @@ router.get('/:id', auth, async (req, res) => {
     catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId') {
-            return res.status(404).json({ msg: 'Post not found' });
+            return res.status(404).json({ msg: 'Shared post not found' });
         }
 
         res.status(500).send('Server Error');
@@ -81,9 +80,9 @@ router.get('/:id', auth, async (req, res) => {
 // @access   Private
 router.delete('/:id', auth, async (req, res) => {
     try {
-        const post = await HikePost.findById(req.params.id);
+        const post = await Shared.findById(req.params.id);
         if (!post) {
-            return res.status(404).json({ msg: 'Post not found' });
+            return res.status(404).json({ msg: 'Shared post not found' });
         }
         // Check user is matched up to post
         if (post.user.toString() !== req.user.id) {
@@ -91,12 +90,12 @@ router.delete('/:id', auth, async (req, res) => {
         }
 
         await post.remove();
-        res.json({ msg: 'Post removed' });
+        res.json({ msg: 'Shared post removed' });
 
     } catch (err) {
         console.error(err.message);
         if (err.kind === 'ObjectId') {
-            return res.status(404).json({ msg: 'Post not found' });
+            return res.status(404).json({ msg: 'Shared post not found' });
         }
 
         res.status(500).send('Server Error');
@@ -108,11 +107,11 @@ router.delete('/:id', auth, async (req, res) => {
 // @access   Private
 router.put('/like/:id', auth, async (req, res) => {
     try {
-        const post = await HikePost.findById(req.params.id);
+        const post = await Shared.findById(req.params.id);
 
         // Check if the post has already been liked
         if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-            return res.status(400).json({ msg: 'Post already liked' });
+            return res.status(400).json({ msg: 'Shared post already liked' });
         }
 
         post.likes.unshift({ user: req.user.id });
@@ -130,11 +129,11 @@ router.put('/like/:id', auth, async (req, res) => {
 // @access   Private
 router.put('/unlike/:id', auth, async (req, res) => {
     try {
-        const post = await HikePost.findById(req.params.id);
+        const post = await Shared.findById(req.params.id);
 
         // Check if the post has already been liked
         if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0) {
-            return res.status(400).json({ msg: 'Post has not yet been liked' });
+            return res.status(400).json({ msg: 'Shared post has not yet been liked' });
         }
 
         // Get remove index
@@ -168,7 +167,7 @@ router.post('/comment/:id',
 
         try {
             const user = await User.findById(req.user.id).select('-password');
-            const post = await HikePost.findById(req.params.id);
+            const post = await Shared.findById(req.params.id);
 
             const newComment = {
                 text: req.body.text,
@@ -192,7 +191,7 @@ router.post('/comment/:id',
 // @access   Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     try {
-        const post = await HikePost.findById(req.params.id);
+        const post = await Shared.findById(req.params.id);
 
         // Pull out comment
         const comment = post.comments.find(

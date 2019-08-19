@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
@@ -15,8 +16,10 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     return loading ? <Spinner /> :
 
         (<div className="res-width">
-
-            <h1 className='large text-primary'>Posts</h1>
+            <div className='text-primary post-head'>
+                <h1 className='large'>Posts</h1>
+                <Link to='/shared' className='btn btn-sml'>Shared Trails</Link>
+            </div>
             <p className='lead'><i className='fas fa-user' />
                 Welcome to the TrailFinder community
             </p>
