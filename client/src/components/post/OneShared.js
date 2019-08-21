@@ -14,7 +14,7 @@ const OneShared = ({ getOneShared, post: { oneShared, loading }, match }) => {
     useEffect(() => { getOneShared(match.params.id); }, [getOneShared, match.params.id]);
 
     return loading || oneShared === null ? <Spinner /> :
-        <>
+        <div className="res-width">
             <Link to='/shared' className='btn'> Back To Shared Trails </Link>
             <SharedItem post={oneShared} showActions={false} />
             <CommentForm postId={oneShared._id} />
@@ -24,7 +24,7 @@ const OneShared = ({ getOneShared, post: { oneShared, loading }, match }) => {
                     <CommentItem key={index} comment={comment} postId={oneShared._id} />
                 ))}
             </div>
-        </>
+        </div>
 };
 
 OneShared.propTypes = {
