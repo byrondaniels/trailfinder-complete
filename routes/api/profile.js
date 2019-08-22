@@ -1,5 +1,4 @@
 const express = require('express');
-const config = require('config');
 // Do I need these or can I delete them
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -374,8 +373,8 @@ router.delete("/courses/:course_id", auth, async (req, res) => {
 router.get('/unsplash/:subject', auth, (req, res) => {
     try {
         const unsplash = new Unsplash({
-            applicationId: `${config.get('unsplashAccessKey')}`,
-            secret: `${config.get('unsplashSecret')}`
+            applicationId: process.env.UNSPLASH_ACCESS_KEY,
+            secret: process.env.UNSPLASH_SECRET
         });
         unsplash.photos
             .getRandomPhoto({ count: "4", width: 100, height: 100, featured: true, query: req.params.subject })

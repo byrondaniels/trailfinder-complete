@@ -8,7 +8,8 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server \" \"npm run client \"",
+    "test2": "concurrently \"env-cmd -f ./config/test.env npm run server \" \"npm run client \"",
+    "dev": "concurrently \"env-cmd  npm run server \" \"npm run client \"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "jest": {
@@ -19,6 +20,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.0",
+    "env-cmd": "^9.0.3",
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
