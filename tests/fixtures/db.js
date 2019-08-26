@@ -39,6 +39,68 @@ const profileOne = {
     externalImg: 'g',
 }
 
+const profileTwoId = new mongoose.Types.ObjectId()
+const profileTwo = {
+    _id: profileTwoId,
+    user: userTwoId,
+    blog: "a",
+    location: "b",
+    status: "c",
+    skills: ["a", "b", "c"],
+    bio: "beans",
+    externalImg: 'g',
+}
+const commentOneId = new mongoose.Types.ObjectId()
+const commentOne = {
+    _id: commentOneId,
+    user: userOneId,
+    text: "W",
+}
+const postOneId = new mongoose.Types.ObjectId()
+const postOne = {
+    _id: postOneId,
+    user: userOneId,
+    text: "W",
+    likes: [],
+    comments: [commentOne]
+}
+
+const postTwoId = new mongoose.Types.ObjectId()
+const postTwo = {
+    _id: postTwoId,
+    user: userOneId,
+    text: "E",
+    likes: [],
+    comments: [{ user: userOneId }]
+}
+
+const postThreeId = new mongoose.Types.ObjectId()
+const postThree = {
+    _id: postThreeId,
+    user: userTwoId,
+    text: "R",
+    likes: [],
+    comments: []
+}
+
+const sharedOneId = new mongoose.Types.ObjectId()
+const sharedOne = {
+    _id: sharedOneId,
+    user: userOneId,
+    text: "W",
+    likes: [],
+    comments: [commentOne]
+}
+
+const sharedTwoId = new mongoose.Types.ObjectId()
+const sharedTwo = {
+    _id: sharedTwoId,
+    user: userOneId,
+    text: "E",
+    likes: [],
+    comments: [{ user: userOneId }]
+}
+
 
 const setupDatabase = async () => {
     await Post.deleteMany()
@@ -48,7 +110,12 @@ const setupDatabase = async () => {
     await new User(userOne).save()
     await new User(userTwo).save()
     await new Profile(profileOne).save()
-
+    await new Profile(profileTwo).save()
+    await new Post(postOne).save()
+    await new Post(postTwo).save()
+    await new Post(postThree).save()
+    await new Shared(sharedOne).save()
+    await new Shared(sharedTwo).save()
 }
 
 module.exports = {
@@ -56,8 +123,18 @@ module.exports = {
     userOne,
     userTwoId,
     userTwo,
-    // taskOne,
-    // taskTwo,
-    // taskThree,
+    profileOne,
+    profileOneId,
+    profileTwo,
+    profileTwoId,
+    postOne,
+    postOneId,
+    postTwo,
+    postTwoId,
+    postThree,
+    postThreeId,
+    commentOneId,
+    sharedOneId,
+    sharedTwoId,
     setupDatabase
 }

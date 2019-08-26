@@ -70,7 +70,6 @@ const ResultsCard = ({
                             onClick={(e) => { e.stopPropagation(); deleteTrail(alreadySaved) }}>
                             Delete
                         </button> : null}
-                    {/* The below will be isLoggedIn once functionality is complete */}
                     {isLoggedIn &&
                         <button id="postBtn"
                             className="btn-dark btn"

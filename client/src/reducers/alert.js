@@ -1,5 +1,5 @@
 import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
-
+// Format of [{id:XX, msg:XX}]
 const initialState = [];
 
 export default function (state = initialState, action) {

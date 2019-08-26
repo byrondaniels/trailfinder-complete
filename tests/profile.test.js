@@ -58,9 +58,6 @@ test('Create profiles for user', async () => {
         .expect(200)
 
 })
-
-
-
 //
 
 test('Update profile for user', async () => {
