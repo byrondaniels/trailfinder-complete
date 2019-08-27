@@ -808,6 +808,7 @@ position: absolute;
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 300;
 }
 
 .trail-card-btn{

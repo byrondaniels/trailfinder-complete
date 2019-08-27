@@ -79,7 +79,7 @@ const ResultsCard = ({
 
                 </div>
             </div>
-            <div className="mas-10">Description: {summary} </div>
+            {heightToggle && <div className="mas-10">Description: {summary} </div>}
         </div>
     )
 };
