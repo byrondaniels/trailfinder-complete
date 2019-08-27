@@ -38,7 +38,7 @@ router.post('/',
 
             const payload = { user: { id: user.id } }
 
-            await jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 },
+            await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 },
                 (err, token) => {
                     if (err) throw err;
                     res.json({ token })

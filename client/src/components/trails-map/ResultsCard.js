@@ -70,7 +70,6 @@ const ResultsCard = ({
                             onClick={(e) => { e.stopPropagation(); deleteTrail(alreadySaved) }}>
                             Delete
                         </button> : null}
-                    {/* The below will be isLoggedIn once functionality is complete */}
                     {isLoggedIn &&
                         <button id="postBtn"
                             className="btn-dark btn"
@@ -80,7 +79,7 @@ const ResultsCard = ({
 
                 </div>
             </div>
-            <div className="mas-10">Description: {summary} </div>
+            {heightToggle && <div className="mas-10">Description: {summary} </div>}
         </div>
     )
 };

@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 import Slider from "react-rangeslider";
 import "react-rangeslider/lib/index.css";
 
-//////////////////////////////////////
-// THIS FUNCTION IS TO BE COMPLETED //
-//////////////////////////////////////
-
 const ChangeRadiusMenu = ({ radius, changeRadius }) => {
 
     return (

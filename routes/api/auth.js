@@ -38,14 +38,14 @@ router.post('/',
 
         try {
             let user = await User.findOne({ email })
-            if (!user) res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+            if (!user) res.status(400).json({ errors: [{ msg: 'Invalid Credentials1' }] });
 
             const isMatch = await bcrypt.compare(password, user.password)
 
-            if (!isMatch) res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+            if (!isMatch) res.status(400).json({ errors: [{ msg: 'Invalid Credentials2' }] });
 
             const payload = { user: { id: user.id } }
-            jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 },
+            jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 },
                 (err, token) => {
                     if (err) throw err;
                     res.json({ token })

@@ -290,6 +290,8 @@ img {
   font-size: 1.4rem;
 }
 
+
+
 .form input[type='number'],
 .form input[type='text'],
 .form input[type='email'],
@@ -302,6 +304,11 @@ img {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+}
+
+html .social-input input {
+  border: none !important;
+  border-bottom: solid 1px lightgrey !important;
 }
 
 .form input[type='submit'],
@@ -801,6 +808,7 @@ position: absolute;
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 300;
 }
 
 .trail-card-btn{

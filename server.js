@@ -2,7 +2,7 @@ const express = require('express')
 const connectDB = require('./config/db')
 // The following is added for when we are ready to push to production
 const path = require('path')
-//
+///
 
 const app = express();
 connectDB()
@@ -29,6 +29,9 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-const PORT = process.env.PORT || 5000;
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log('server started on port ', PORT))
+    app.listen(PORT, () => console.log('server started on port ', PORT))
+
+} else module.exports = app
