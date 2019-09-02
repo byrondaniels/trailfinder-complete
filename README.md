@@ -4,6 +4,8 @@
 
 This is a MERN stack application. 
 
+Java backend in development: https://github.com/byrondaniels/trailfinder-java
+
 It is a small social network app that includes authentication, profiles, forum posts and the ability to search for hikes using the Google Map API finding hikes sourced from Trail Project API
 
 ## Quick Start
